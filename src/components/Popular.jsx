@@ -11,7 +11,6 @@ const MoviePopular = ({ setSearchResult, search, setSearch }) => {
 
   const key = import.meta.env.VITE_KEY.replace(/["\\]/g, "");
   const url = import.meta.env.VITE_URL.replace(/["\\]/g, "");
-  console.log("HOLA", `${url}/${params.category}/popular?api_key=${key}`);
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -36,7 +35,6 @@ const MoviePopular = ({ setSearchResult, search, setSearch }) => {
     return <h1> Loading... </h1>;
   }
 
-  console.log("POPULAR", popular);
   return (
     <div style={{ marginTop: "15px", marginLeft: "25px" }}>
       <div style={{ marginTop: "15px", marginBottom: "15px" }}>
