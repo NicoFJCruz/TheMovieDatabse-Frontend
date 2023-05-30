@@ -6,7 +6,7 @@ import { Link } from "react-router-dom";
 const Grid = ({ data }) => {
   data = data.results;
   const params = useParams();
-  console.log(params);
+  
   return (
     <div className="Parent">
       <div className="container">
