@@ -11,8 +11,8 @@ const IndividualUser = () => {
   const [userFavlistM, setUserFavlistM] = useState([]);
   const [userFavlistTv, setUserFavlistTv] = useState([]);
 
-  const key = process.env.KEY;
-  const url = process.env.URL;
+  const key = process.env.VITE_KEY;
+  const url = process.env.VITE_URL;
 
   const params = useParams();
 

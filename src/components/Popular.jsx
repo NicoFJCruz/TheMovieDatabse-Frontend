@@ -2,7 +2,6 @@ import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router";
 import Grid from "../commons/Grid";
-import config from "../config/config";
 
 const MoviePopular = ({ setSearchResult, search, setSearch }) => {
   const [popular, setPopular] = useState([]);
@@ -10,12 +9,15 @@ const MoviePopular = ({ setSearchResult, search, setSearch }) => {
   const params = useParams();
   const navigate = useNavigate();
 
+  const key = process.env.VITE_KEY;
+  const url = process.env.VITE_URL;
+
   const handleSubmit = (e) => {
     e.preventDefault();
 
     axios
       .get(
-        `${config.url}/search/${params.category}?api_key=${config.key}&query=${search}`
+        `${url}/search/${params.category}?api_key=${key}&query=${search}`
       )
       .then((result) => {
         setSearchResult(result.data);
@@ -25,7 +27,7 @@ const MoviePopular = ({ setSearchResult, search, setSearch }) => {
 
   useEffect(() => {
     axios
-      .get(`${config.url}/${params.category}/popular?api_key=${config.key}`)
+      .get(`${url}/${params.category}/popular?api_key=${key}`)
       .then((result) => {
         setPopular(result.data);
       });

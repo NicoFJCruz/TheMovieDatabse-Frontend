@@ -1,7 +1,6 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router";
-import config from "../config/config";
 
 const Content = ({ user, setFavorites }) => {
   const params = useParams();
@@ -9,6 +8,10 @@ const Content = ({ user, setFavorites }) => {
   const [languages, setLanguages] = useState([]);
   const [fav, setFav] = useState([]);
   const [favlist, setFavlist] = useState([]);
+
+  const key = process.env.VITE_KEY;
+  const url = process.env.VITE_URL;
+  const imageLarge = process.env.VITE_IMAGE_LARGE;
 
   useEffect(() => {
     axios
@@ -18,7 +21,7 @@ const Content = ({ user, setFavorites }) => {
       });
 
     axios
-      .get(`${config.url}/configuration/languages?api_key=${config.key}`)
+      .get(`${url}/configuration/languages?api_key=${key}`)
       .then((res) => {
         setLanguages(res.data);
       });
@@ -27,7 +30,7 @@ const Content = ({ user, setFavorites }) => {
   useEffect(() => {
     fav.map((data) => {
       return axios
-        .get(`${config.url}/${data.type}/${data.favId}?api_key=${config.key}`)
+        .get(`${url}/${data.type}/${data.favId}?api_key=${key}`)
         .then((res) => {
           let arrayList = favlist;
           arrayList.push(res.data);
@@ -58,7 +61,7 @@ const Content = ({ user, setFavorites }) => {
   useEffect(() => {
     axios
       .get(
-        `${config.url}/${params.category}/${params.id}?api_key=${config.key}`
+        `${url}/${params.category}/${params.id}?api_key=${key}`
       )
       .then((result) => {
         setData(result.data);
@@ -81,13 +84,13 @@ const Content = ({ user, setFavorites }) => {
             {params.category !== "person" ? (
               <img
                 style={{ display: "block", margin: "auto" }}
-                src={`${config.image_large}${data.poster_path}?api_key=${config.key}`}
+                src={`${imageLarge}${data.poster_path}?api_key=${key}`}
                 alt="Poster"
               />
             ) : (
               <img
                 style={{ display: "block", margin: "auto" }}
-                src={`${config.image_large}${data.profile_path}?api_key=${config.key}`}
+                src={`${imageLarge}${data.profile_path}?api_key=${key}`}
                 alt="Person profile picture"
               />
             )}

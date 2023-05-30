@@ -8,8 +8,8 @@ const Favorites = ({ user }) => {
   const [favlist, setFavlist] = useState({ results: [] });
   const params = useParams();
 
-  const key = process.env.KEY;
-  const url = process.env.URL;
+  const key = process.env.VITE_KEY;
+  const url = process.env.VITE_URL;
 
   useEffect(() => {
     axios
