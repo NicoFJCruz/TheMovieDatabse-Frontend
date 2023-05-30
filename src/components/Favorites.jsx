@@ -2,12 +2,14 @@ import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router";
 import Grid from "../commons/Grid";
-import config from "../config/config";
 
 const Favorites = ({ user }) => {
   const [fav, setFav] = useState([]);
   const [favlist, setFavlist] = useState({ results: [] });
   const params = useParams();
+
+  const key = process.env.KEY;
+  const url = process.env.URL;
 
   useEffect(() => {
     axios
@@ -20,7 +22,7 @@ const Favorites = ({ user }) => {
   useEffect(() => {
     let arrayPromiseFav = fav.map((data) => {
       return axios
-        .get(`${config.url}/${data.type}/${data.favId}?api_key=${config.key}`)
+        .get(`${url}/${data.type}/${data.favId}?api_key=${key}`)
         .then((res) => {
           return res.data;
         });
