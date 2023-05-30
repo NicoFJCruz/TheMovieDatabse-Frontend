@@ -1,8 +1,8 @@
 import React from "react";
 
 const Card = ({ data, category }) => {
-  const key = process.env.VITE_KEY;
-  const image = process.env.VITE_IMAGE;
+  const key = import.meta.env.VITE_KEY.replace(/["\\]/g, "");
+  const image = import.meta.env.VITE_IMAGE.replace(/["\\]/g, "");
   
   return (
     <>

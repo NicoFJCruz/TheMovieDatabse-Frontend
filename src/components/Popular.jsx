@@ -9,16 +9,15 @@ const MoviePopular = ({ setSearchResult, search, setSearch }) => {
   const params = useParams();
   const navigate = useNavigate();
 
-  const key = process.env.VITE_KEY;
-  const url = process.env.VITE_URL;
+  const key = import.meta.env.VITE_KEY.replace(/["\\]/g, "");
+  const url = import.meta.env.VITE_URL.replace(/["\\]/g, "");
+  console.log("HOLA", `${url}/${params.category}/popular?api_key=${key}`);
 
   const handleSubmit = (e) => {
     e.preventDefault();
 
     axios
-      .get(
-        `${url}/search/${params.category}?api_key=${key}&query=${search}`
-      )
+      .get(`${url}/search/${params.category}?api_key=${key}&query=${search}`)
       .then((result) => {
         setSearchResult(result.data);
       });
@@ -37,6 +36,7 @@ const MoviePopular = ({ setSearchResult, search, setSearch }) => {
     return <h1> Loading... </h1>;
   }
 
+  console.log("POPULAR", popular);
   return (
     <div style={{ marginTop: "15px", marginLeft: "25px" }}>
       <div style={{ marginTop: "15px", marginBottom: "15px" }}>
