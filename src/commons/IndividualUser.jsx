@@ -2,7 +2,6 @@ import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router";
 import { Link } from "react-router-dom";
-import config from "../config/config";
 import Card from "./Card";
 
 const IndividualUser = () => {
@@ -11,6 +10,9 @@ const IndividualUser = () => {
   const [userFavTv, setUserFavTv] = useState([]);
   const [userFavlistM, setUserFavlistM] = useState([]);
   const [userFavlistTv, setUserFavlistTv] = useState([]);
+
+  const key = process.env.KEY;
+  const url = process.env.URL;
 
   const params = useParams();
 
@@ -31,7 +33,7 @@ const IndividualUser = () => {
   useEffect(() => {
     let arrayPromiseM = userFavM.map((data) => {
       return axios
-        .get(`${config.url}/${data.type}/${data.favId}?api_key=${config.key}`)
+        .get(`${url}/${data.type}/${data.favId}?api_key=${key}`)
         .then((res) => {
           return res.data;
         });
@@ -45,7 +47,7 @@ const IndividualUser = () => {
   useEffect(() => {
     let arrayPromiseTV = userFavTv.map((data) => {
       return axios
-        .get(`${config.url}/${data.type}/${data.favId}?api_key=${config.key}`)
+        .get(`${url}/${data.type}/${data.favId}?api_key=${key}`)
         .then((res) => {
           return res.data;
         });
