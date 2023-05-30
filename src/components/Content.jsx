@@ -9,9 +9,9 @@ const Content = ({ user, setFavorites }) => {
   const [fav, setFav] = useState([]);
   const [favlist, setFavlist] = useState([]);
 
-  const key = process.env.VITE_KEY;
-  const url = process.env.VITE_URL;
-  const imageLarge = process.env.VITE_IMAGE_LARGE;
+  const key = import.meta.env.VITE_KEY.replace(/["\\]/g, "");
+  const url = import.meta.env.VITE_URL.replace(/["\\]/g, "");
+  const imageLarge = import.meta.env.VITE_IMAGE_LARGE.replace(/["\\]/g, "");
 
   useEffect(() => {
     axios
