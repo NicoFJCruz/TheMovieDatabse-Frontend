@@ -21,6 +21,7 @@ const App = () => {
     const userLog = JSON.parse(localStorage.getItem("user")) || {};
     setUser(userLog);
   }, []);
+
   return (
     <>
       <Navbar user={user} setUser={setUser} />

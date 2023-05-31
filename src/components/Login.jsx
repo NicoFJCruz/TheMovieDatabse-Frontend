@@ -12,7 +12,7 @@ const Login = ({ setUser }) => {
 
     axios
       .post(
-        "http://localhost:3001/user/login",
+        "http://localhost:3001/api/users/login",
         {
           email,
           password,

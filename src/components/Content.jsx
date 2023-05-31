@@ -12,19 +12,16 @@ const Content = ({ user, setFavorites }) => {
   const key = import.meta.env.VITE_KEY.replace(/["\\]/g, "");
   const url = import.meta.env.VITE_URL.replace(/["\\]/g, "");
   const imageLarge = import.meta.env.VITE_IMAGE_LARGE.replace(/["\\]/g, "");
-
+  
+  console.log("HOLA", `http://localhost:3001/api/favorites/${user.id}`);
   useEffect(() => {
-    axios
-      .get(`http://localhost:3001/fav/${user.id}/${params.category}`)
-      .then((res) => {
-        setFav(res.data);
-      });
+    axios.get(`http://localhost:3001/api/favorites/${user.id}`).then((res) => {
+      setFav(res.data.filter((item) => item.type === params.category));
+    });
 
-    axios
-      .get(`${url}/configuration/languages?api_key=${key}`)
-      .then((res) => {
-        setLanguages(res.data);
-      });
+    axios.get(`${url}/configuration/languages?api_key=${key}`).then((res) => {
+      setLanguages(res.data);
+    });
   }, []);
 
   useEffect(() => {
@@ -41,8 +38,7 @@ const Content = ({ user, setFavorites }) => {
 
   const handleAddClick = () => {
     axios
-      .post(`http://localhost:3001/fav/${user.id}`, {
-        userId: `${user.id}`,
+      .post(`http://localhost:3001/api/favorites/${user.id}`, {
         favId: `${params.id}`,
         type: `${params.category}`,
       })
@@ -52,7 +48,7 @@ const Content = ({ user, setFavorites }) => {
   };
 
   const handleRemoveClick = () => {
-    axios.post(`http://localhost:3001/fav/${user.id}/remove`, {
+    axios.post(`http://localhost:3001/api/favorites/remove/${user.id}`, {
       userId: `${user.id}`,
       favId: `${params.id}`,
     });
@@ -60,9 +56,7 @@ const Content = ({ user, setFavorites }) => {
 
   useEffect(() => {
     axios
-      .get(
-        `${url}/${params.category}/${params.id}?api_key=${key}`
-      )
+      .get(`${url}/${params.category}/${params.id}?api_key=${key}`)
       .then((result) => {
         setData(result.data);
       });
@@ -134,7 +128,13 @@ const Content = ({ user, setFavorites }) => {
               <>
                 <h3 style={{ textAlign: "center" }}>Also Known as: </h3>
                 <h4 style={{ textAlign: "center" }}>
-                  <ul style={{ textAlign: "left", display:"inline-block", marginTop:"0px"}}>
+                  <ul
+                    style={{
+                      textAlign: "left",
+                      display: "inline-block",
+                      marginTop: "0px",
+                    }}
+                  >
                     {data.also_known_as.map((one, i) => {
                       return <li key={i}> {one} </li>;
                     })}

@@ -7,7 +7,7 @@ const UsersNMDB = ({ user }) => {
   const [userList, setUserList] = useState([]);
 
   useEffect(() => {
-    axios.get(`http://localhost:3001/user/${user.id}/all`).then((res) => {
+    axios.get(`http://localhost:3001/api/users`).then((res) => {
       setUserList(res.data);
     });
   }, []);
@@ -17,7 +17,7 @@ const UsersNMDB = ({ user }) => {
       <div className="container">
         {userList.map((data, i) => {
           return (
-            <div classname="cardContainer" key={i}>
+            <div className="cardContainer" key={i}>
               <Link to={`/user/${data.id}`}>
                 <CardUser data={data} user={user} />
               </Link>

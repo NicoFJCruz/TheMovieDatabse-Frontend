@@ -4,19 +4,19 @@ import { useParams } from "react-router";
 import Grid from "../commons/Grid";
 
 const Favorites = ({ user }) => {
+  console.log("HOLA", user.id);
+
   const [fav, setFav] = useState([]);
   const [favlist, setFavlist] = useState({ results: [] });
   const params = useParams();
 
   const key = import.meta.env.VITE_KEY.replace(/["\\]/g, "");
-  const url = url = import.meta.env.VITE_URL.replace(/["\\]/g, "");
+  const url = import.meta.env.VITE_URL.replace(/["\\]/g, "");
 
   useEffect(() => {
-    axios
-      .get(`http://localhost:3001/fav/${user.id}/${params.category}`)
-      .then((res) => {
-        setFav(res.data);
-      });
+    axios.get(`http://localhost:3001/api/favorites/${user.id}`).then((res) => {
+      setFav(res.data.filter((item) => item.type === params.category));
+    });
   }, [params.category]);
 
   useEffect(() => {

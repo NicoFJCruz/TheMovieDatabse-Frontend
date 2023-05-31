@@ -25,7 +25,7 @@ const CardUser = ({ data, user }) => {
 
       <div>
         <p className="textCard">
-          {data.id}: {data.fullname}
+          {data.id}: {data.name}
         </p>
       </div>
     </div>

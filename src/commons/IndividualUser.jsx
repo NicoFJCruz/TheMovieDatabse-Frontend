@@ -12,20 +12,17 @@ const IndividualUser = () => {
   const [userFavlistTv, setUserFavlistTv] = useState([]);
 
   const key = import.meta.env.VITE_KEY.replace(/["\\]/g, "");
-  const url = url = import.meta.env.VITE_URL.replace(/["\\]/g, "");
+  const url = import.meta.env.VITE_URL.replace(/["\\]/g, "");
 
   const params = useParams();
 
   useEffect(() => {
-    axios.get(`http://localhost:3001/fav/${params.id}/movie`).then((res) => {
-      setUserFavM(res.data);
+    axios.get(`http://localhost:3001/api/favorites/${params.id}`).then((res) => {
+      setUserFavM(res.data.filter((item) => item.type === "movie"));
+      setUserFavTv(res.data.filter((item) => item.type === "tv"));
     });
 
-    axios.get(`http://localhost:3001/fav/${params.id}/tv`).then((res) => {
-      setUserFavTv(res.data);
-    });
-
-    axios.get(`http://localhost:3001/user/${params.id}`).then((res) => {
+    axios.get(`http://localhost:3001/api/users/${params.id}`).then((res) => {
       setUsuario(res.data);
     });
   }, []);
@@ -69,7 +66,7 @@ const IndividualUser = () => {
       }}
     >
       <h1>
-        <i> Individual User {usuario.id}:</i> {usuario.fullname}
+        <i> Individual User {usuario.id}:</i> {usuario.name}
       </h1>
 
       <div className="FavoritesMovie">
@@ -102,7 +99,7 @@ const IndividualUser = () => {
             <div className="container">
               {userFavlistTv.map((data, i) => {
                 return (
-                  <div classname="cardContainer" key={i}>
+                  <div className="cardContainer" key={i}>
                     <Link to={`/tv/${data.id}`}>
                       <Card data={data} category={"tv"} />
                     </Link>

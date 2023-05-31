@@ -7,7 +7,7 @@ const Navbar = ({ user, setUser }) => {
 
   const handleLogout = () => {
     axios
-      .post("http://localhost:3001/user/logout", {}, { withCredentials: true })
+      .post("http://localhost:3001/api/users/logout", {}, { withCredentials: true })
       .then(() => {
         setUser({});
         localStorage.removeItem("user");
@@ -22,7 +22,7 @@ const Navbar = ({ user, setUser }) => {
   return (
     <nav style={{ marginTop: "15px" }}>
       <a href="/">
-        {!user.fullname ? "NicoMDB" : `NicoMDB - ${user.fullname}`}
+        {!user.name ? "NicoMDB" : `NicoMDB - ${user.name}`}
       </a>
       <Link to="movie/popular">
         <button style={{ marginLeft: "5px" }}>

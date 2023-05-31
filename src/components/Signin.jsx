@@ -2,23 +2,30 @@ import axios from "axios";
 import React, { useState } from "react";
 import { useNavigate } from "react-router";
 
-
 const Signin = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [fullname, setFullname] = useState("");
-  const navigate = useNavigate()
+  const [name, setName] = useState("");
+  const [lastName, setLastName] = useState("")
+  const navigate = useNavigate();
 
   const handleSubmit = (e) => {
     e.preventDefault();
     axios
-      .post("http://localhost:3001/user", {
-        fullname,
-        email,
-        password,
-      })
+      .post(
+        "http://localhost:3001/api/users",
+        {
+          name,
+          lastName,
+          email,
+          password,
+        },
+        {
+          withCredentials: true,
+        }
+      )
       .then((res) => {
-        navigate("/login")
+        navigate("/login");
         alert("Usuario creado");
       })
       .catch(() => {
@@ -28,11 +35,20 @@ const Signin = () => {
 
   return (
     <>
-    <h1> Bienvenid@ a NicoMDB </h1>
-    <h3> Si no tiene una cuenta, cree un nuevo usuario</h3>
+      <h1> Bienvenid@ a NicoMDB </h1>
+      <h3> Si no tiene una cuenta, cree un nuevo usuario</h3>
       <form onSubmit={handleSubmit}>
-        <label>Name: </label>
-        <input value={fullname} onChange={(e) => setFullname(e.target.value)}></input>
+      <label>Name: </label>
+        <input
+          value={name}
+          onChange={(e) => setName(e.target.value)}
+        ></input>
+        <br />
+        <label>Lastname: </label>
+        <input
+          value={lastName}
+          onChange={(e) => setLastName(e.target.value)}
+        ></input>
         <br />
         <label>email: </label>
         <input value={email} onChange={(e) => setEmail(e.target.value)}></input>
