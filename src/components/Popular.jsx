@@ -5,6 +5,7 @@ import Grid from "../commons/Grid";
 
 const MoviePopular = ({ setSearchResult, search, setSearch }) => {
   const [popular, setPopular] = useState([]);
+  const [latest, setLatest] = useState([])
   const [value, setValue] = useState("");
   const params = useParams();
   const navigate = useNavigate();
@@ -37,19 +38,26 @@ const MoviePopular = ({ setSearchResult, search, setSearch }) => {
 
   return (
     <div style={{ marginTop: "15px", marginLeft: "25px" }}>
-      <div style={{ marginTop: "15px", marginBottom: "15px" }}>
-        <form onSubmit={handleSubmit}>
-          <input
-            value={value}
-            onChange={(e) => {
-              setValue(e.target.value);
-              setSearch(e.target.value);
-            }}
-            placeholder="Search"
-          />
-          <button type="submit">Search</button>
-        </form>
-      </div>
+      <nav class="navbar navbar-light">
+        <div class="container-fluid">
+          <form class="d-flex" onSubmit={handleSubmit}>
+            <input
+              class="form-control me-2"
+              value={value}
+              onChange={(e) => {
+                setValue(e.target.value);
+                setSearch(e.target.value);
+              }}
+              type="search"
+              placeholder="Search"
+              aria-label="Search"
+            />
+            <button class="btn btn-outline-success" type="submit">
+              Search
+            </button>
+          </form>
+        </div>
+      </nav>
 
       <Grid data={popular} />
     </div>

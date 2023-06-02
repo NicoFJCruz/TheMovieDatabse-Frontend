@@ -12,7 +12,7 @@ const Grid = ({ data }) => {
       <div className="container">
         {data.map((data, i) => {
           return (
-            <div classname="cardContainer" key={i}>
+            <div className="cardContainer" key={i}>
               <Link to={`/${params.category}/${data.id}`}>
                 <Card data={data} category={params.category} />
               </Link>

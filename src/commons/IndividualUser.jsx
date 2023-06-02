@@ -76,7 +76,7 @@ const IndividualUser = () => {
             <div className="container">
               {userFavlistM.map((data, i) => {
                 return (
-                  <div classname="cardContainer" key={i}>
+                  <div className="cardContainer" key={i}>
                     <Link to={`/movie/${data.id}`}>
                       <Card data={data} category={"movie"} />
                     </Link>

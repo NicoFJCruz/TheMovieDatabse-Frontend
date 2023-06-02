@@ -10,6 +10,7 @@ import Favorites from "./components/Favorites";
 import Home from "./components/Home";
 import UsersNMDB from "./components/UsersNMDB";
 import IndividualUser from "./commons/IndividualUser";
+import Navbar2 from "./commons/Navbar";
 
 const App = () => {
   const [search, setSearch] = useState("");
@@ -20,11 +21,11 @@ const App = () => {
   useEffect(() => {
     const userLog = JSON.parse(localStorage.getItem("user")) || {};
     setUser(userLog);
-  }, []);
+  }, [])
 
   return (
     <>
-      <Navbar user={user} setUser={setUser} />
+      <Navbar2 user={user} setUser={setUser} />
 
       <Routes>
         <Route path="/signin" element={<Signin />} />
