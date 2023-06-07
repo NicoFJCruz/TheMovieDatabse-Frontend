@@ -1,15 +1,11 @@
 import React, { useEffect, useState } from "react";
-import { Swiper, SwiperSlide } from "swiper/react";
-import { Pagination } from "swiper";
 import axios from "axios";
 import "./List.css";
-import "swiper/css";
-import "swiper/css/pagination";
+import { Container, Row, Col } from "react-bootstrap";
 import { Link } from "react-router-dom";
-import { CircularProgressbar, buildStyles } from "react-circular-progressbar";
-import "react-circular-progressbar/dist/styles.css";
+import SearchNav from "../../commons/SearchNav";
 
-const Person = () => {
+const Person = ({ setSearchResult, search, setSearch }) => {
   const [windowWidth, setWindowWidth] = useState(window.innerWidth);
   const [list, setList] = useState([]);
   const key = import.meta.env.VITE_KEY.replace(/["\\]/g, "");
@@ -25,62 +21,42 @@ const Person = () => {
     });
   }, []);
 
-  useEffect(() => {
-    const handleResize = () => {
-      setWindowWidth(window.innerWidth);
-    };
-
-    window.addEventListener("resize", handleResize);
-
-    return () => {
-      window.removeEventListener("resize", handleResize);
-    };
-  }, [window.innerWidth]);
-
   return (
     <>
-      <Swiper
-        slidesPerView={percentage}
-        spaceBetween={30}
-        pagination={{
-          clickable: true,
-        }}
-        modules={[Pagination]}
-        className="mySwiper"
-      >
-        {list.map((item, i) => {
-          console.log(item);
-          return (
-            <SwiperSlide key={i}>
-              <Link to={`/person/${item.id}`}>
-                <div className="card-body">
-                  <img
-                    src={`${image}${item.profile_path}?api_key=${key}`}
-                    alt={item.title}
-                  />
-                  <div className="bottomContainer">
-                    <CircularProgressbar
-                      value={item.vote_average}
-                      maxValue={10}
-                      text={`${item.vote_average}`}
-                      strokeWidth={10}
-                      className="circular"
-                      styles={buildStyles({
-                        textColor: "#000",
-                        pathColor: `#00bfff`,
-                        trailColor: "#e6e6e6",
-                      })}
-                    />
-                    <h5> Saber más </h5>
-                  </div>
-                </div>
-              </Link>
-            </SwiperSlide>
-          );
-        })}
-      </Swiper>
+      <div style={{ marginTop: "15px", marginLeft: "25px" }}>
+        <SearchNav
+          setSearchResult={setSearchResult}
+          setSearch={setSearch}
+          search={search}
+        />
+        
+        <Container>
+          <Row>
+            {list.map((item, i) => {
+              return (
+                <Col key={i} xs={12} sm={6} md={4} lg={3}>
+                  <Link to={`/person/${item.id}`}>
+                    <div className="card-body">
+                      <img
+                        src={`${image}${item.profile_path}?api_key=${key}`}
+                        alt={item.title}
+                      />
+                      <div className="bottomContainer">
+                        <h5> Saber más </h5>
+                      </div>
+                    </div>
+                  </Link>
+                </Col>
+              );
+            })}
+          </Row>
+        </Container>
+      </div>
     </>
   );
 };
 
 export default Person;
+
+/*
+ */

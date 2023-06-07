@@ -1,8 +1,8 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router";
-import Grid from "../commons/Grid";
 import List from "./List/List";
+import SearchNav from "../commons/SearchNav";
 
 const MoviePopular = ({ setSearchResult, search, setSearch }) => {
   const [popular, setPopular] = useState([]);
@@ -39,26 +39,11 @@ const MoviePopular = ({ setSearchResult, search, setSearch }) => {
 
   return (
     <div style={{ marginTop: "15px", marginLeft: "25px" }}>
-      <nav className="navbar navbar-light">
-        <div className="container-fluid">
-          <form className="d-flex" onSubmit={handleSubmit}>
-            <input
-              className="form-control me-2"
-              value={value}
-              onChange={(e) => {
-                setValue(e.target.value);
-                setSearch(e.target.value);
-              }}
-              type="search"
-              placeholder="Search"
-              aria-label="Search"
-            />
-            <button className="btn btn-outline-success" type="submit">
-              Search
-            </button>
-          </form>
-        </div>
-      </nav>
+      <SearchNav
+        setSearchResult={setSearchResult}
+        setSearch={setSearch}
+        search={search}
+      />
 
       {params.category === "person" ? (
         <div>
