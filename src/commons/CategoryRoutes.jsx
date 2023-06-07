@@ -5,6 +5,7 @@ import Search from "../components/Search";
 import { Route, Routes } from "react-router";
 import Favorites from "../components/Favorites";
 import Content from "../components/Content";
+import Person from "../components/List/Person";
 
 const CategoryRoutes = ({
   setSearchResult,
@@ -21,13 +22,19 @@ const CategoryRoutes = ({
       <Route
         path="/"
         element={
-            category === "movie" || category === "tv" ? (
+          category === "movie" || category === "tv" ? (
             <MoviePopular
               setSearchResult={setSearchResult}
               setSearch={setSearch}
               search={search}
             />
-          ) : null
+          ) : (
+            <Person
+              setSearchResult={setSearchResult}
+              setSearch={setSearch}
+              search={search}
+            />
+          )
         }
       />
       <Route
