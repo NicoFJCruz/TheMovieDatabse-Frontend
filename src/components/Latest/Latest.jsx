@@ -5,6 +5,9 @@ import axios from "axios";
 import "./latest.css";
 import "swiper/css";
 import "swiper/css/pagination";
+import { Link } from "react-router-dom";
+import { CircularProgressbar, buildStyles } from "react-circular-progressbar";
+import "react-circular-progressbar/dist/styles.css";
 
 const MovieList = () => {
   const [windowWidth, setWindowWidth] = useState(window.innerWidth);
@@ -50,14 +53,29 @@ const MovieList = () => {
         {upcoming.map((item, i) => {
           return (
             <SwiperSlide key={i}>
-              <div  className="col-10 container">
-                <div className="card card-body">
+              <Link to={`movie/${item.id}`}>
+                <div className="card-body">
                   <img
                     src={`${image}${item.poster_path}?api_key=${key}`}
                     alt={item.title}
                   />
+                  <div className="bottomContainer">
+                    <CircularProgressbar
+                      value={item.vote_average}
+                      maxValue={10}
+                      text={`${item.vote_average}`}
+                      strokeWidth={10}
+                      className="circular"
+                      styles={buildStyles({
+                        textColor: "#000",
+                        pathColor: `#00bfff`,
+                        trailColor: "#e6e6e6",
+                      })}
+                    />
+                    <h5> Saber más </h5>
+                  </div>
                 </div>
-              </div>
+              </Link>
             </SwiperSlide>
           );
         })}
