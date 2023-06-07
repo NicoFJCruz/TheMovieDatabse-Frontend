@@ -11,7 +11,6 @@ import Home from "./components/Home";
 import UsersNMDB from "./components/UsersNMDB";
 import IndividualUser from "./commons/IndividualUser";
 import Navbar2 from "./commons/Navbar";
-import Latest from "./components/Latest/MovieList";
 
 const App = () => {
   const [search, setSearch] = useState("");

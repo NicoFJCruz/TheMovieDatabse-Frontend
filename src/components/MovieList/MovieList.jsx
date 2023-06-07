@@ -9,20 +9,21 @@ import { Link } from "react-router-dom";
 import { CircularProgressbar, buildStyles } from "react-circular-progressbar";
 import "react-circular-progressbar/dist/styles.css";
 
-const MovieList = () => {
+const MovieList = ({ type }) => {
   const [windowWidth, setWindowWidth] = useState(window.innerWidth);
-  const [upcoming, setUpcoming] = useState([]);
+  const [list, setList] = useState([]);
 
   const key = import.meta.env.VITE_KEY.replace(/["\\]/g, "");
   const url = import.meta.env.VITE_URL.replace(/["\\]/g, "");
   const image = import.meta.env.VITE_IMAGE.replace(/["\\]/g, "");
-  let percentage = windowWidth > 1080 ? 5 : windowWidth > 760 ? 3 : windowWidth > 440 ? 2 : 1;
+  let percentage =
+    windowWidth > 1080 ? 5 : windowWidth > 760 ? 3 : windowWidth > 440 ? 2 : 1;
 
   useEffect(() => {
-    axios.get(`${url}/movie/upcoming?api_key=${key}`).then((result) => {
-      setUpcoming(result.data.results);
+    axios.get(`${url}/movie/${type}?api_key=${key}`).then((result) => {
+      setList(result.data.results);
     });
-  }, []);
+  }, [type]);
 
   useEffect(() => {
     const handleResize = () => {
@@ -38,9 +39,6 @@ const MovieList = () => {
 
   return (
     <>
-      <div>
-        <h1> Latest movies</h1>
-      </div>
       <Swiper
         slidesPerView={percentage}
         spaceBetween={30}
@@ -50,7 +48,7 @@ const MovieList = () => {
         modules={[Pagination]}
         className="mySwiper"
       >
-        {upcoming.map((item, i) => {
+        {list.map((item, i) => {
           return (
             <SwiperSlide key={i}>
               <Link to={`movie/${item.id}`}>
