@@ -11,6 +11,7 @@ import Home from "./components/Home";
 import UsersNMDB from "./components/UsersNMDB";
 import IndividualUser from "./commons/IndividualUser";
 import Navbar2 from "./commons/Navbar";
+import Latest from "./components/Latest/Latest";
 
 const App = () => {
   const [search, setSearch] = useState("");
@@ -60,6 +61,7 @@ const App = () => {
         />
         <Route path="/users" element={<UsersNMDB user={user} />} />
         <Route path="/user/:id" element={<IndividualUser />} />
+        <Route path="/" element={<Latest user={user} />} />
         <Route path="*" element={<Home user={user} />} />
       </Routes>
     </>
