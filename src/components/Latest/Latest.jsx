@@ -16,7 +16,7 @@ const MovieList = () => {
   const key = import.meta.env.VITE_KEY.replace(/["\\]/g, "");
   const url = import.meta.env.VITE_URL.replace(/["\\]/g, "");
   const image = import.meta.env.VITE_IMAGE.replace(/["\\]/g, "");
-  let percentage = windowWidth > 1080 ? 5 : 3;
+  let percentage = windowWidth > 1080 ? 5 : windowWidth > 760 ? 3 : windowWidth > 440 ? 2 : 1;
 
   useEffect(() => {
     axios.get(`${url}/movie/upcoming?api_key=${key}`).then((result) => {
