@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { Route, Routes } from "react-router";
 import Login from "./components/Login";
-import Navbar from "./components/Navbar";
 import Signin from "./components/Signin";
 import MoviePopular from "./components/Popular";
 import Search from "./components/Search";
@@ -31,7 +30,7 @@ const App = () => {
         <Route path="/signin" element={<Signin />} />
         <Route path="/login" element={<Login setUser={setUser} />} />
         <Route
-          path="/:category/popular"
+          path="/:category"
           element={
             <MoviePopular
               setSearchResult={setSearchResult}

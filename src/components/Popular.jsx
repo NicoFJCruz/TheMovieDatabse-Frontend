@@ -39,11 +39,11 @@ const MoviePopular = ({ setSearchResult, search, setSearch }) => {
 
   return (
     <div style={{ marginTop: "15px", marginLeft: "25px" }}>
-      <nav class="navbar navbar-light">
-        <div class="container-fluid">
-          <form class="d-flex" onSubmit={handleSubmit}>
+      <nav className="navbar navbar-light">
+        <div className="container-fluid">
+          <form className="d-flex" onSubmit={handleSubmit}>
             <input
-              class="form-control me-2"
+              className="form-control me-2"
               value={value}
               onChange={(e) => {
                 setValue(e.target.value);
@@ -53,25 +53,37 @@ const MoviePopular = ({ setSearchResult, search, setSearch }) => {
               placeholder="Search"
               aria-label="Search"
             />
-            <button class="btn btn-outline-success" type="submit">
+            <button className="btn btn-outline-success" type="submit">
               Search
             </button>
           </form>
         </div>
       </nav>
 
-      <div>
-        <h1> Latest movies</h1>
-        <MovieList type={params.category === "tv" ? "on_the_air" : "upcoming"} data={params.category} />
-      </div>
-      <div>
-        <h1> Top Rated movies</h1>
-        <MovieList type={"top_rated"} data={params.category} />
-      </div>
-      <div>
-        <h1> Popular movies</h1>
-        <MovieList type={"popular"} data={params.category} />
-      </div>
+      {params.category === "person" ? (
+        <div>
+          <h1> Popular movies</h1>
+          <MovieList type={"popular"} data={params.category} />
+        </div>
+      ) : (
+        <>
+          <div>
+            <h1> Latest movies</h1>
+            <MovieList
+              type={params.category === "tv" ? "on_the_air" : "upcoming"}
+              data={params.category}
+            />
+          </div>
+          <div>
+            <h1> Top Rated movies</h1>
+            <MovieList type={"top_rated"} data={params.category} />
+          </div>
+          <div>
+            <h1> Popular movies</h1>
+            <MovieList type={"popular"} data={params.category} />
+          </div>
+        </>
+      )}
     </div>
   );
 };

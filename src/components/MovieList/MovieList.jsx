@@ -15,6 +15,8 @@ const MovieList = ({ type, data }) => {
   const key = import.meta.env.VITE_KEY.replace(/["\\]/g, "");
   const url = import.meta.env.VITE_URL.replace(/["\\]/g, "");
   const image = import.meta.env.VITE_IMAGE.replace(/["\\]/g, "");
+
+  console.log(data);
   let percentage =
     windowWidth > 1080 ? 5 : windowWidth > 760 ? 3 : windowWidth > 440 ? 2 : 1;
 
@@ -48,12 +50,17 @@ const MovieList = ({ type, data }) => {
         className="mySwiper"
       >
         {list.map((item, i) => {
+          console.log(item);
           return (
             <SwiperSlide key={i}>
-              <Link to={`${data}/${item.id}`}>
+              <Link to={`/${data}/${item.id}`}>
                 <div className="card-body">
                   <img
-                    src={`${image}${item.poster_path}?api_key=${key}`}
+                    src={
+                      data === "person"
+                        ? `${image}${item.profile_path}?api_key=${key}`
+                        : `${image}${item.poster_path}?api_key=${key}`
+                    }
                     alt={item.title}
                   />
                   <div className="bottomContainer">

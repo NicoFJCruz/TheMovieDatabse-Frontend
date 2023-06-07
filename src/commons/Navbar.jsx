@@ -56,7 +56,7 @@ const Navbar = ({ user, setUser }) => {
               <a
                 className="nav-link active"
                 aria-current="page"
-                href="/movie/popular"
+                href="/movie"
               >
                 Movies
               </a>
@@ -65,7 +65,7 @@ const Navbar = ({ user, setUser }) => {
               <a
                 className="nav-link active"
                 aria-current="page"
-                href="/tv/popular"
+                href="/tv"
               >
                 Series
               </a>
@@ -74,7 +74,7 @@ const Navbar = ({ user, setUser }) => {
               <a
                 className="nav-link active"
                 aria-current="page"
-                href="/person/popular"
+                href="/person"
               >
                 Person
               </a>
