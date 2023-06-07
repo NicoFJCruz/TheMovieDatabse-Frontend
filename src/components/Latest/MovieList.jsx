@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Pagination } from "swiper";
 import axios from "axios";
-import "./latest.css";
+import "./MovieList.css";
 import "swiper/css";
 import "swiper/css/pagination";
 import { Link } from "react-router-dom";
