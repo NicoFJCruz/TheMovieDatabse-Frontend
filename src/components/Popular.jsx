@@ -2,7 +2,7 @@ import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router";
 import Grid from "../commons/Grid";
-import MovieList from "./MovieList/MovieList";
+import List from "./List/List";
 
 const MoviePopular = ({ setSearchResult, search, setSearch }) => {
   const [popular, setPopular] = useState([]);
@@ -63,24 +63,24 @@ const MoviePopular = ({ setSearchResult, search, setSearch }) => {
       {params.category === "person" ? (
         <div>
           <h1> Popular movies</h1>
-          <MovieList type={"popular"} data={params.category} />
+          <List type={"popular"} data={params.category} />
         </div>
       ) : (
         <>
           <div>
             <h1> Latest movies</h1>
-            <MovieList
+            <List
               type={params.category === "tv" ? "on_the_air" : "upcoming"}
               data={params.category}
             />
           </div>
           <div>
             <h1> Top Rated movies</h1>
-            <MovieList type={"top_rated"} data={params.category} />
+            <List type={"top_rated"} data={params.category} />
           </div>
           <div>
             <h1> Popular movies</h1>
-            <MovieList type={"popular"} data={params.category} />
+            <List type={"popular"} data={params.category} />
           </div>
         </>
       )}

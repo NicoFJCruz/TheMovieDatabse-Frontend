@@ -1,6 +1,6 @@
 import React from "react";
-import MovieList from "./MovieList/MovieList";
-import MavieList from "./MovieList/MovieList";
+import MovieList from "./List/List";
+import MavieList from "./List/List";
 
 const Home = ({ user }) => {
   return (

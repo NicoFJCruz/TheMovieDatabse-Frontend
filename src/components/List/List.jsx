@@ -2,14 +2,14 @@ import React, { useEffect, useState } from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Pagination } from "swiper";
 import axios from "axios";
-import "./MovieList.css";
+import "./List.css";
 import "swiper/css";
 import "swiper/css/pagination";
 import { Link } from "react-router-dom";
 import { CircularProgressbar, buildStyles } from "react-circular-progressbar";
 import "react-circular-progressbar/dist/styles.css";
 
-const MovieList = ({ type, data }) => {
+const List = ({ type, data }) => {
   const [windowWidth, setWindowWidth] = useState(window.innerWidth);
   const [list, setList] = useState([]);
   const key = import.meta.env.VITE_KEY.replace(/["\\]/g, "");
@@ -88,4 +88,4 @@ const MovieList = ({ type, data }) => {
   );
 };
 
-export default MovieList;
+export default List;
