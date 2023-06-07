@@ -2,10 +2,11 @@ import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router";
 import Grid from "../commons/Grid";
+import MovieList from "./MovieList/MovieList";
 
 const MoviePopular = ({ setSearchResult, search, setSearch }) => {
   const [popular, setPopular] = useState([]);
-  const [latest, setLatest] = useState([])
+  const [latest, setLatest] = useState([]);
   const [value, setValue] = useState("");
   const params = useParams();
   const navigate = useNavigate();
@@ -59,7 +60,18 @@ const MoviePopular = ({ setSearchResult, search, setSearch }) => {
         </div>
       </nav>
 
-      <Grid data={popular} />
+      <div>
+        <h1> Latest movies</h1>
+        <MovieList type={params.category === "tv" ? "on_the_air" : "upcoming"} data={params.category} />
+      </div>
+      <div>
+        <h1> Top Rated movies</h1>
+        <MovieList type={"top_rated"} data={params.category} />
+      </div>
+      <div>
+        <h1> Popular movies</h1>
+        <MovieList type={"popular"} data={params.category} />
+      </div>
     </div>
   );
 };

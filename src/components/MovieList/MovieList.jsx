@@ -9,10 +9,9 @@ import { Link } from "react-router-dom";
 import { CircularProgressbar, buildStyles } from "react-circular-progressbar";
 import "react-circular-progressbar/dist/styles.css";
 
-const MovieList = ({ type }) => {
+const MovieList = ({ type, data }) => {
   const [windowWidth, setWindowWidth] = useState(window.innerWidth);
   const [list, setList] = useState([]);
-
   const key = import.meta.env.VITE_KEY.replace(/["\\]/g, "");
   const url = import.meta.env.VITE_URL.replace(/["\\]/g, "");
   const image = import.meta.env.VITE_IMAGE.replace(/["\\]/g, "");
@@ -20,10 +19,10 @@ const MovieList = ({ type }) => {
     windowWidth > 1080 ? 5 : windowWidth > 760 ? 3 : windowWidth > 440 ? 2 : 1;
 
   useEffect(() => {
-    axios.get(`${url}/movie/${type}?api_key=${key}`).then((result) => {
+    axios.get(`${url}/${data}/${type}?api_key=${key}`).then((result) => {
       setList(result.data.results);
     });
-  }, [type]);
+  }, [type, data]);
 
   useEffect(() => {
     const handleResize = () => {
@@ -51,7 +50,7 @@ const MovieList = ({ type }) => {
         {list.map((item, i) => {
           return (
             <SwiperSlide key={i}>
-              <Link to={`movie/${item.id}`}>
+              <Link to={`${data}/${item.id}`}>
                 <div className="card-body">
                   <img
                     src={`${image}${item.poster_path}?api_key=${key}`}
