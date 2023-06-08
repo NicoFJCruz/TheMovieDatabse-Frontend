@@ -2,26 +2,60 @@ import React from "react";
 import { useParams } from "react-router";
 import Card from "./Card";
 import { Link } from "react-router-dom";
+import { Container, Row, Col } from "react-bootstrap";
 
 const Grid = ({ data }) => {
-  data = data.results;
   const params = useParams();
-  
+  const image = import.meta.env.VITE_IMAGE.replace(/["\\]/g, "");
+  const key = import.meta.env.VITE_KEY.replace(/["\\]/g, "");
+
   return (
-    <div className="Parent">
-      <div className="container">
-        {data.map((data, i) => {
+    <Container>
+      <Row>
+        {data.map((item, i) => {
           return (
-            <div className="cardContainer" key={i}>
-              <Link to={`/${params.category}/${data.id}`}>
-                <Card data={data} category={params.category} />
+            <Col key={i} xs={12} sm={6} md={4} lg={3}>
+              <Link to={`/${params.category}/${item.id}`}>
+                <div className="card-body">
+                  <img
+                    src={`${image}${item.profile_path}?api_key=${key}`}
+                    alt={item.title}
+                  />
+                  <div className="bottomContainer">
+                    <h5> Saber más </h5>
+                  </div>
+                </div>
               </Link>
-            </div>
+            </Col>
           );
         })}
-      </div>
-    </div>
+      </Row>
+    </Container>
   );
 };
 
 export default Grid;
+
+/*
+<Container>
+          <Row>
+            {data.map((item, i) => {
+              return (
+                <Col key={i} xs={12} sm={6} md={4} lg={3}>
+                  <Link to={`/${params.category}/${data.id}`}>
+                    <div className="card-body">
+                      <img
+                        src={`${image}${item.profile_path}?api_key=${key}`}
+                        alt={item.title}
+                      />
+                      <div className="bottomContainer">
+                        <h5> Saber más </h5>
+                      </div>
+                    </div>
+                  </Link>
+                </Col>
+              );
+            })}
+          </Row>
+        </Container>
+*/

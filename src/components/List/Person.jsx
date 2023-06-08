@@ -4,6 +4,7 @@ import "./List.css";
 import { Container, Row, Col } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import SearchNav from "../../commons/SearchNav";
+import Grid from "../../commons/Grid";
 
 const Person = ({ setSearchResult, search, setSearch }) => {
   const [windowWidth, setWindowWidth] = useState(window.innerWidth);
@@ -32,7 +33,9 @@ const Person = ({ setSearchResult, search, setSearch }) => {
 
         <h1> Popular people </h1>
 
-        <Container>
+        < Grid data={list} />
+
+        {/* <Container>
           <Row>
             {list.map((item, i) => {
               return (
@@ -52,7 +55,7 @@ const Person = ({ setSearchResult, search, setSearch }) => {
               );
             })}
           </Row>
-        </Container>
+        </Container> */}
       </div>
     </>
   );
