@@ -12,10 +12,14 @@ const Favorites = ({ user }) => {
   const url = import.meta.env.VITE_URL.replace(/["\\]/g, "");
 
   useEffect(() => {
-    axios.get(`http://localhost:3001/api/favorites/${user.id}`).then((res) => {
-      setFav(res.data.filter((item) => item.type === params.category));
-    });
-  }, [params.category]);
+    if (user.id && params.category) {
+      axios
+        .get(`http://localhost:3001/api/favorites/${user.id}`)
+        .then((res) => {
+          setFav(res.data.filter((item) => item.type === params.category));
+        });
+    }
+  }, [params.category, user.id]);
 
   useEffect(() => {
     let arrayPromiseFav = fav.map((data) => {
@@ -38,7 +42,7 @@ const Favorites = ({ user }) => {
   return (
     <>
       <h1> Favorites </h1>
-      <Grid data={favlist} />
+      <Grid data={favlist.results} />
     </>
   );
 };
