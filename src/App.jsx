@@ -49,6 +49,7 @@ const App = () => {
               user={user}
               setSearchResult={setSearchResult}
               setSearch={setSearch}
+              search={search}
             />
           }
         />
