@@ -12,9 +12,9 @@ const Search = ({ searchResult, search }) => {
   return (
     <div style={{ marginTop: "15px", marginLeft: "25px" }}>
       <h1>
-        Search {params.category} "{search}":{" "}
+        Search {params.category} "{search}":
       </h1>
-      <Grid data={searchResult} />
+      <Grid data={searchResult.results} />
     </div>
   );
 };

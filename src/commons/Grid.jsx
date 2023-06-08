@@ -18,7 +18,7 @@ const Grid = ({ data }) => {
               <Link to={`/${params.category}/${item.id}`}>
                 <div className="card-body">
                   <img
-                    src={`${image}${item.profile_path}?api_key=${key}`}
+                    src={`${image}${item.poster_path}?api_key=${key}`}
                     alt={item.title}
                   />
                   <div className="bottomContainer">

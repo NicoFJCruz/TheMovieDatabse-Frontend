@@ -17,7 +17,7 @@ const App = () => {
   useEffect(() => {
     const userLog = JSON.parse(localStorage.getItem("user")) || {};
     setUser(userLog);
-  }, [])
+  }, []);
 
   return (
     <>
@@ -42,7 +42,16 @@ const App = () => {
         />
         <Route path="/users" element={<UsersNMDB user={user} />} />
         <Route path="/user/:id" element={<IndividualUser />} />
-        <Route path="/" element={<Home user={user} />} />
+        <Route
+          path="/"
+          element={
+            <Home
+              user={user}
+              setSearchResult={setSearchResult}
+              setSearch={setSearch}
+            />
+          }
+        />
         <Route path="*" element={<Home user={user} />} />
       </Routes>
     </>

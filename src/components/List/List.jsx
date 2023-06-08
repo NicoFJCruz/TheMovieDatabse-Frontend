@@ -16,7 +16,6 @@ const List = ({ type, data }) => {
   const url = import.meta.env.VITE_URL.replace(/["\\]/g, "");
   const image = import.meta.env.VITE_IMAGE.replace(/["\\]/g, "");
 
-  console.log(data);
   let percentage =
     windowWidth > 1080 ? 5 : windowWidth > 760 ? 3 : windowWidth > 440 ? 2 : 1;
 
@@ -50,7 +49,6 @@ const List = ({ type, data }) => {
         className="mySwiper"
       >
         {list.map((item, i) => {
-          console.log(item);
           return (
             <SwiperSlide key={i}>
               <Link to={`/${data}/${item.id}`}>

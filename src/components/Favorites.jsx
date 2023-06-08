@@ -4,8 +4,6 @@ import { useParams } from "react-router";
 import Grid from "../commons/Grid";
 
 const Favorites = ({ user }) => {
-  console.log("HOLA", user.id);
-
   const [fav, setFav] = useState([]);
   const [favlist, setFavlist] = useState({ results: [] });
   const params = useParams();

@@ -13,7 +13,6 @@ const Content = ({ user, setFavorites }) => {
   const url = import.meta.env.VITE_URL.replace(/["\\]/g, "");
   const imageLarge = import.meta.env.VITE_IMAGE_LARGE.replace(/["\\]/g, "");
   
-  console.log("HOLA", `http://localhost:3001/api/favorites/${user.id}`);
   useEffect(() => {
     axios.get(`http://localhost:3001/api/favorites/${user.id}`).then((res) => {
       setFav(res.data.filter((item) => item.type === params.category));
