@@ -29,7 +29,9 @@ const Person = ({ setSearchResult, search, setSearch }) => {
           setSearch={setSearch}
           search={search}
         />
-        
+
+        <h1> Popular people </h1>
+
         <Container>
           <Row>
             {list.map((item, i) => {
