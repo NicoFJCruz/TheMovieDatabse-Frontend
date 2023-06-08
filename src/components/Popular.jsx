@@ -10,9 +10,10 @@ const MoviePopular = ({ setSearchResult, search, setSearch }) => {
   const [value, setValue] = useState("");
   const params = useParams();
   const navigate = useNavigate();
-
   const key = import.meta.env.VITE_KEY.replace(/["\\]/g, "");
   const url = import.meta.env.VITE_URL.replace(/["\\]/g, "");
+
+  let type = params.category === "movie" ? "movies" : "tv series";
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -31,6 +32,8 @@ const MoviePopular = ({ setSearchResult, search, setSearch }) => {
       .then((result) => {
         setPopular(result.data);
       });
+
+    type = params.category === "movie" ? "movies" : "tv series";
   }, [params.category]);
 
   if (!popular.results) {
@@ -45,30 +48,23 @@ const MoviePopular = ({ setSearchResult, search, setSearch }) => {
         search={search}
       />
 
-      {params.category === "person" ? (
+      <>
         <div>
-          <h1> Popular movies</h1>
+          <h1> Latest {type}</h1>
+          <List
+            type={params.category === "tv" ? "on_the_air" : "upcoming"}
+            data={params.category}
+          />
+        </div>
+        <div>
+          <h1> Top Rated {type}</h1>
+          <List type={"top_rated"} data={params.category} />
+        </div>
+        <div>
+          <h1> Popular {type}</h1>
           <List type={"popular"} data={params.category} />
         </div>
-      ) : (
-        <>
-          <div>
-            <h1> Latest movies</h1>
-            <List
-              type={params.category === "tv" ? "on_the_air" : "upcoming"}
-              data={params.category}
-            />
-          </div>
-          <div>
-            <h1> Top Rated movies</h1>
-            <List type={"top_rated"} data={params.category} />
-          </div>
-          <div>
-            <h1> Popular movies</h1>
-            <List type={"popular"} data={params.category} />
-          </div>
-        </>
-      )}
+      </>
     </div>
   );
 };
