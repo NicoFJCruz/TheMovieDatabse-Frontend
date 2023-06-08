@@ -35,27 +35,3 @@ const Grid = ({ data }) => {
 };
 
 export default Grid;
-
-/*
-<Container>
-          <Row>
-            {data.map((item, i) => {
-              return (
-                <Col key={i} xs={12} sm={6} md={4} lg={3}>
-                  <Link to={`/${params.category}/${data.id}`}>
-                    <div className="card-body">
-                      <img
-                        src={`${image}${item.profile_path}?api_key=${key}`}
-                        alt={item.title}
-                      />
-                      <div className="bottomContainer">
-                        <h5> Saber más </h5>
-                      </div>
-                    </div>
-                  </Link>
-                </Col>
-              );
-            })}
-          </Row>
-        </Container>
-*/

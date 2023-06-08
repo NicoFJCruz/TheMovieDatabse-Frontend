@@ -1,8 +1,6 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import "./List.css";
-import { Container, Row, Col } from "react-bootstrap";
-import { Link } from "react-router-dom";
 import SearchNav from "../../commons/SearchNav";
 import Grid from "../../commons/Grid";
 
@@ -34,34 +32,9 @@ const Person = ({ setSearchResult, search, setSearch }) => {
         <h1> Popular people </h1>
 
         < Grid data={list} />
-
-        {/* <Container>
-          <Row>
-            {list.map((item, i) => {
-              return (
-                <Col key={i} xs={12} sm={6} md={4} lg={3}>
-                  <Link to={`/person/${item.id}`}>
-                    <div className="card-body">
-                      <img
-                        src={`${image}${item.profile_path}?api_key=${key}`}
-                        alt={item.title}
-                      />
-                      <div className="bottomContainer">
-                        <h5> Saber más </h5>
-                      </div>
-                    </div>
-                  </Link>
-                </Col>
-              );
-            })}
-          </Row>
-        </Container> */}
       </div>
     </>
   );
 };
 
 export default Person;
-
-/*
- */
