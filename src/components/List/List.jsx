@@ -16,7 +16,7 @@ const List = ({ type, data }) => {
   const image = import.meta.env.VITE_IMAGE.replace(/["\\]/g, "");
 
   let percentage =
-    windowWidth > 1080 ? 5 : windowWidth > 760 ? 3 : windowWidth >= 540 ? 2 : 1;
+  windowWidth > 1280 ? 5 : windowWidth > 1080 ? 4 : windowWidth > 760 ? 3 : windowWidth >= 540 ? 2 : 1;
 
   useEffect(() => {
     axios.get(`${url}/${data}/${type}?api_key=${key}`).then((result) => {
