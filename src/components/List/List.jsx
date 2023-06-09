@@ -5,19 +5,18 @@ import axios from "axios";
 import "./List.css";
 import "swiper/css";
 import "swiper/css/pagination";
-import { Link } from "react-router-dom";
-import { CircularProgressbar, buildStyles } from "react-circular-progressbar";
-import "react-circular-progressbar/dist/styles.css";
+import CardMovie from "../../commons/Card/CardMovie";
 
 const List = ({ type, data }) => {
   const [windowWidth, setWindowWidth] = useState(window.innerWidth);
   const [list, setList] = useState([]);
+
   const key = import.meta.env.VITE_KEY.replace(/["\\]/g, "");
   const url = import.meta.env.VITE_URL.replace(/["\\]/g, "");
   const image = import.meta.env.VITE_IMAGE.replace(/["\\]/g, "");
 
   let percentage =
-    windowWidth > 1080 ? 5 : windowWidth > 760 ? 3 : windowWidth > 440 ? 2 : 1;
+    windowWidth > 1080 ? 5 : windowWidth > 760 ? 3 : windowWidth >= 540 ? 2 : 1;
 
   useEffect(() => {
     axios.get(`${url}/${data}/${type}?api_key=${key}`).then((result) => {
@@ -51,33 +50,7 @@ const List = ({ type, data }) => {
         {list.map((item, i) => {
           return (
             <SwiperSlide key={i}>
-              <Link to={`/${data}/${item.id}`}>
-                <div className="card-body">
-                  <img
-                    src={
-                      data === "person"
-                        ? `${image}${item.profile_path}?api_key=${key}`
-                        : `${image}${item.poster_path}?api_key=${key}`
-                    }
-                    alt={item.title}
-                  />
-                  <div className="bottomContainer">
-                    <CircularProgressbar
-                      value={item.vote_average}
-                      maxValue={10}
-                      text={`${item.vote_average}`}
-                      strokeWidth={10}
-                      className="circular"
-                      styles={buildStyles({
-                        textColor: "#000",
-                        pathColor: `#00bfff`,
-                        trailColor: "#e6e6e6",
-                      })}
-                    />
-                    <h5> Saber más </h5>
-                  </div>
-                </div>
-              </Link>
+              <CardMovie element={item} data={data} />
             </SwiperSlide>
           );
         })}

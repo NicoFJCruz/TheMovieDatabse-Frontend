@@ -1,0 +1,51 @@
+.cardMovieBody {
+  display: flex;
+  flex-direction: column;
+  width: 250px;
+  height: 500px;
+  margin: 0.5rem;
+  text-align: center;
+}
+.cardMovieImageContainer{
+  height: 367.500px;
+}
+
+.cardMovieLink {
+  text-decoration: none;
+  color: inherit;
+}
+
+.cardMovieImage {
+  border-radius: 5%;
+  max-width: 245px;
+  display: block;
+  margin: auto;
+}
+
+.botomContainer {
+  display: flex;
+  justify-content: space-around;
+}
+
+.cardMovieProgressbar {
+  height: 3rem;
+  font-size: large;
+  position: relative;
+  top: -50%;
+  background-color: black;
+  border-radius: 50%;
+  color: rgb(255, 255, 255);
+  text-align: center;
+}
+
+.cardMovieDate {
+  font-size: medium;
+  color: #64748b;
+}
+
+.cardMovieTitle {
+  margin-left: 5px;
+  margin-right: 5px;
+  font-size: 24px;
+}
+
