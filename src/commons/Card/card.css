@@ -1,7 +1,6 @@
 .cardMovieBody {
   display: flex;
   flex-direction: column;
-  border: 1px solid red;
   width: 250px;
   height: 500px;
   margin: 0.5rem;
@@ -53,7 +52,6 @@
 .cardPersonBody {
   display: flex;
   flex-direction: column;
-  border: 1px solid red;
   width: 250px;
   height: 450px;
   margin: 0.5rem;

@@ -31,7 +31,7 @@ const Person = ({ setSearchResult, search, setSearch }) => {
 
         <h1> Popular people </h1>
 
-        < Grid data={list} />
+        < Grid data={list} type={"person"}/>
       </div>
     </>
   );

@@ -1,29 +1,8 @@
-import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-import { CircularProgressbar, buildStyles } from "react-circular-progressbar";
-import "react-circular-progressbar/dist/styles.css";
 import "./card.css";
 
-const CardPerson = () => {
-  const [list, setList] = useState([]);
-
-  const key = import.meta.env.VITE_KEY.replace(/["\\]/g, "");
-  const url = import.meta.env.VITE_URL.replace(/["\\]/g, "");
-  const image = import.meta.env.VITE_IMAGE_LARGE.replace(/["\\]/g, "");
-
-  useEffect(() => {
-    axios.get(`${url}/person/popular?api_key=${key}`).then((result) => {
-      setList(result.data.results);
-    });
-  }, []);
-
-  if (!list[0]) {
-    return <h1> Hola </h1>;
-  }
-
-  const element = list[4];
-
+const CardPerson = ({ element }) => {
   return (
     <div className="cardPersonBody">
       <Link to={`/person/${element.id}`} className="cardMovieLink">

@@ -41,7 +41,7 @@ const Home = ({ user, setSearchResult, setSearch, search }) => {
           Bienvenid@ <i>{user.name}</i> a NicoMDB
         </h1>
       </div>
-      {/* <Row className="justify-content-center">
+      <Row className="justify-content-center">
         <Col xs={12} sm={8} md={6} lg={4}>
           <Form className="justify-content-center" onSubmit={handleSubmit}>
             <FormControl
@@ -58,8 +58,7 @@ const Home = ({ user, setSearchResult, setSearch, search }) => {
           </Form>
         </Col>
       </Row>
-      <Grid data={trending.results}/> */}
-      <CardPerson />
+      <Grid data={trending.results}/> 
     </>
   );
 };

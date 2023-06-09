@@ -8,7 +8,8 @@ import "react-circular-progressbar/dist/styles.css";
 const CardMovie = ({ element, data }) => {
   const key = import.meta.env.VITE_KEY.replace(/["\\]/g, "");
   const image = import.meta.env.VITE_IMAGE_LARGE.replace(/["\\]/g, "");
-
+  console.log("ELEMENT", element);
+  console.log("DATA", data);
   return (
     <div className="cardMovieBody">
       <Link to={`/${data}/${element.id}`} className="cardMovieLink">
@@ -24,7 +25,7 @@ const CardMovie = ({ element, data }) => {
             <CircularProgressbar
               value={element.vote_average}
               maxValue={10}
-              text={`${element.vote_average}`}
+              text={`${element.vote_average.toFixed(1)}`}
               strokeWidth={10}
               className="cardMovieProgressbar"
               styles={buildStyles({
