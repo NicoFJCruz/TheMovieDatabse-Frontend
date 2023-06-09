@@ -1,13 +1,14 @@
 .cardMovieBody {
   display: flex;
   flex-direction: column;
+  border: 1px solid red;
   width: 250px;
   height: 500px;
   margin: 0.5rem;
   text-align: center;
 }
-.cardMovieImageContainer{
-  height: 367.500px;
+.cardMovieImageContainer {
+  height: 367.5px;
 }
 
 .cardMovieLink {
@@ -49,3 +50,12 @@
   font-size: 24px;
 }
 
+.cardPersonBody {
+  display: flex;
+  flex-direction: column;
+  border: 1px solid red;
+  width: 250px;
+  height: 450px;
+  margin: 0.5rem;
+  text-align: center;
+}

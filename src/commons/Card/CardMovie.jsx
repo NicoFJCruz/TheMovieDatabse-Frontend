@@ -2,7 +2,7 @@ import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { CircularProgressbar, buildStyles } from "react-circular-progressbar";
-import "./cardMovie.css";
+import "./card.css";
 import "react-circular-progressbar/dist/styles.css";
 
 const CardMovie = ({ element, data }) => {

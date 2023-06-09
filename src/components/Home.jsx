@@ -3,6 +3,7 @@ import React, { useState } from "react";
 import { useEffect } from "react";
 import { Form, FormControl, Button, Row, Col } from "react-bootstrap";
 import Grid from "../commons/Grid";
+import CardPerson from "./CardPerson";
 
 const Home = ({ user, setSearchResult, setSearch, search }) => {
   const url = import.meta.env.VITE_URL.replace(/["\\]/g, "");
@@ -40,7 +41,7 @@ const Home = ({ user, setSearchResult, setSearch, search }) => {
           Bienvenid@ <i>{user.name}</i> a NicoMDB
         </h1>
       </div>
-      <Row className="justify-content-center">
+      {/* <Row className="justify-content-center">
         <Col xs={12} sm={8} md={6} lg={4}>
           <Form className="justify-content-center" onSubmit={handleSubmit}>
             <FormControl
@@ -57,7 +58,8 @@ const Home = ({ user, setSearchResult, setSearch, search }) => {
           </Form>
         </Col>
       </Row>
-      <Grid data={trending.results}/>
+      <Grid data={trending.results}/> */}
+      <CardPerson />
     </>
   );
 };
