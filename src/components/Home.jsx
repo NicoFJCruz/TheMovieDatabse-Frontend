@@ -3,7 +3,7 @@ import React, { useState } from "react";
 import { useEffect } from "react";
 import { Form, FormControl, Button, Row, Col } from "react-bootstrap";
 import Grid from "../commons/Grid";
-import CardPerson from "./CardPerson";
+import CardPerson from "../commons/Card/CardPerson";
 
 const Home = ({ user, setSearchResult, setSearch, search }) => {
   const url = import.meta.env.VITE_URL.replace(/["\\]/g, "");
