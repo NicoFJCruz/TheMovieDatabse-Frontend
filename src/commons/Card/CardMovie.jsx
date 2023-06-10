@@ -4,18 +4,22 @@ import { Link } from "react-router-dom";
 import { CircularProgressbar, buildStyles } from "react-circular-progressbar";
 import "./card.css";
 import "react-circular-progressbar/dist/styles.css";
+import movieposter from "../../assets/movieposter.png";
 
 const CardMovie = ({ element, data }) => {
   const key = import.meta.env.VITE_KEY.replace(/["\\]/g, "");
   const image = import.meta.env.VITE_IMAGE_LARGE.replace(/["\\]/g, "");
-  console.log("ELEMENT", element);
-  console.log("DATA", data);
+
   return (
     <div className="cardMovieBody">
       <Link to={`/${data}/${element.id}`} className="cardMovieLink">
         <div className="cardMovieImageContainer">
           <img
-            src={`${image}${element.poster_path}?api_key=${key}`}
+            src={
+              !element.poster_path
+                ? movieposter
+                : `${image}${element.poster_path}?api_key=${key}`
+            }
             alt={element.title}
             className="cardMovieImage"
           />
@@ -46,11 +50,14 @@ const CardMovie = ({ element, data }) => {
             />
           </div>
           <h5 className="cardMovieDate">
-            Release: &nbsp; 
+            Release: &nbsp;
             {data === "tv" ? element.first_air_date : element.release_date}
           </h5>
         </div>
-        <h3 className="cardMovieTitle"> {data === "tv" ? element.original_name : element.title} </h3>
+        <h3 className="cardMovieTitle">
+          {" "}
+          {data === "tv" ? element.original_name : element.title}{" "}
+        </h3>
       </Link>
     </div>
   );

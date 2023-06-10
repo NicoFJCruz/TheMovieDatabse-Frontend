@@ -5,12 +5,13 @@ import { Form, FormControl, Button, Row, Col } from "react-bootstrap";
 import Grid from "../commons/Grid";
 import CardPerson from "../commons/Card/CardPerson";
 
-const Home = ({ user, setSearchResult, setSearch, search }) => {
+const Home = ({ user, setSearchResult, setSearch, search, searchResult }) => {
   const url = import.meta.env.VITE_URL.replace(/["\\]/g, "");
   const key = import.meta.env.VITE_KEY.replace(/["\\]/g, "");
 
   const [value, setValue] = useState("");
   const [trending, setTrending] = useState([]);
+  const [grid, setGrid] = useState(false);
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -19,6 +20,7 @@ const Home = ({ user, setSearchResult, setSearch, search }) => {
       .get(`${url}/search/multi?api_key=${key}&query=${search}`)
       .then((result) => {
         setSearchResult(result.data);
+        setGrid(true);
       });
 
     setValue("");
@@ -58,7 +60,9 @@ const Home = ({ user, setSearchResult, setSearch, search }) => {
           </Form>
         </Col>
       </Row>
-      <Grid data={trending.results}/> 
+      
+      {!grid ? <Grid data={trending.results} /> :
+      <Grid data={searchResult.results} />}
     </>
   );
 };

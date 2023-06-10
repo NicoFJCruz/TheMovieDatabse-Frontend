@@ -50,6 +50,7 @@ const App = () => {
               setSearchResult={setSearchResult}
               setSearch={setSearch}
               search={search}
+              searchResult={searchResult}
             />
           }
         />

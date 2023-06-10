@@ -1,14 +1,23 @@
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import "./card.css";
+import profilepicture from "../../assets/profilepicture.png";
 
 const CardPerson = ({ element }) => {
+  const key = import.meta.env.VITE_KEY.replace(/["\\]/g, "");
+  const url = import.meta.env.VITE_URL.replace(/["\\]/g, "");
+  const image = import.meta.env.VITE_IMAGE_LARGE.replace(/["\\]/g, "");
+
   return (
     <div className="cardPersonBody">
       <Link to={`/person/${element.id}`} className="cardMovieLink">
         <div className="cardMovieImageContainer">
           <img
-            src={`${image}${element.profile_path}?api_key=${key}`}
+            src={
+              !element.profile_path
+                ? profilepicture
+                : `${image}${element.profile_path}?api_key=${key}`
+            }
             alt={element.title}
             className="cardMovieImage"
           />

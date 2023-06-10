@@ -9,6 +9,7 @@ const Grid = ({ data }) => {
   const params = useParams();
   const image = import.meta.env.VITE_IMAGE.replace(/["\\]/g, "");
   const key = import.meta.env.VITE_KEY.replace(/["\\]/g, "");
+
   return (
     <Container>
       <Row>
@@ -17,9 +18,11 @@ const Grid = ({ data }) => {
             <Col key={i} xs={12} sm={6} lg={4} xl={3}>
               {params.category === "person" ? (
                 <CardPerson element={item} />
+              ) : item.media_type === "person" ? (
+                <CardPerson element={item} />
               ) : (
                 <CardMovie element={item} data={item.media_type} />
-              )}            
+              )}
             </Col>
           );
         })}

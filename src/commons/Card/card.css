@@ -18,6 +18,7 @@
 .cardMovieImage {
   border-radius: 5%;
   max-width: 245px;
+  max-height: 367.500px;
   display: block;
   margin: auto;
 }
