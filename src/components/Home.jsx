@@ -15,6 +15,9 @@ const Home = ({ user, setSearchResult, setSearch, search, searchResult }) => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    if (!search) {
+      return null
+    }
 
     axios
       .get(`${url}/search/multi?api_key=${key}&query=${search}`)
@@ -56,7 +59,7 @@ const Home = ({ user, setSearchResult, setSearch, search, searchResult }) => {
               }}
               value={value}
             />
-            <Button variant="outline-primary">Search</Button>
+            <Button variant="outline-primary" type="submit">Search</Button>
           </Form>
         </Col>
       </Row>

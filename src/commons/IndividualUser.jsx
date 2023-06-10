@@ -2,7 +2,7 @@ import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router";
 import { Link } from "react-router-dom";
-import Card from "./Card";
+import CardMovie from "./Card/CardMovie";
 
 const IndividualUser = () => {
   const [usuario, setUsuario] = useState({});
@@ -17,10 +17,12 @@ const IndividualUser = () => {
   const params = useParams();
 
   useEffect(() => {
-    axios.get(`http://localhost:3001/api/favorites/${params.id}`).then((res) => {
-      setUserFavM(res.data.filter((item) => item.type === "movie"));
-      setUserFavTv(res.data.filter((item) => item.type === "tv"));
-    });
+    axios
+      .get(`http://localhost:3001/api/favorites/${params.id}`)
+      .then((res) => {
+        setUserFavM(res.data.filter((item) => item.type === "movie"));
+        setUserFavTv(res.data.filter((item) => item.type === "tv"));
+      });
 
     axios.get(`http://localhost:3001/api/users/${params.id}`).then((res) => {
       setUsuario(res.data);
@@ -78,7 +80,7 @@ const IndividualUser = () => {
                 return (
                   <div className="cardContainer" key={i}>
                     <Link to={`/movie/${data.id}`}>
-                      <Card data={data} category={"movie"} />
+                      <CardMovie element={data} data={"movie"} />
                     </Link>
                   </div>
                 );
@@ -101,7 +103,7 @@ const IndividualUser = () => {
                 return (
                   <div className="cardContainer" key={i}>
                     <Link to={`/tv/${data.id}`}>
-                      <Card data={data} category={"tv"} />
+                      <CardMovie element={data} data={"tv"} />
                     </Link>
                   </div>
                 );
