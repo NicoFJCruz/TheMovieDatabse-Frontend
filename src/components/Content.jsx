@@ -4,7 +4,7 @@ import { useParams } from "react-router";
 import IndividualMovie from "./Individual/IndividualMovie";
 
 const Content = ({ user, setFavorites }) => {
-  const params = useParams();
+/*   const params = useParams();
   const [data, setData] = useState([]);
   const [languages, setLanguages] = useState([]);
   const [fav, setFav] = useState([]);
@@ -65,7 +65,7 @@ const Content = ({ user, setFavorites }) => {
   if (!data.id) {
     return <h1> Loading... </h1>;
   }
-
+ */
   return (
     <>
       <IndividualMovie

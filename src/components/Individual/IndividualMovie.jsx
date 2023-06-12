@@ -7,8 +7,7 @@ const IndividualMovie = ({ user, setFavorites }) => {
   const params = useParams();
   const [data, setData] = useState([]);
   const [languages, setLanguages] = useState([]);
-  const [fav, setFav] = useState([]);
-  const [favlist, setFavlist] = useState([]);
+  const [isFavorite, setIsFavorite] = useState(false);
 
   const key = import.meta.env.VITE_KEY.replace(/["\\]/g, "");
   const url = import.meta.env.VITE_URL.replace(/["\\]/g, "");
@@ -19,26 +18,41 @@ const IndividualMovie = ({ user, setFavorites }) => {
   );
 
   useEffect(() => {
-    axios.get(`http://localhost:3001/api/favorites/${user.id}`).then((res) => {
-      setFav(res.data.filter((item) => item.type === params.category));
-    });
+    async function fetchData() {
+      try {
+        const current = await axios.get(
+          `${url}/${params.category}/${params.id}?api_key=${key}`
+        );
+
+        if (user.id && params.category) {
+          const favorites = await axios.get(
+            `http://localhost:3001/api/favorites/${user.id}`
+          );
+          const findFavorite = await favorites.data.find(
+            (item) => Number(item.favId) === current.data.id
+          );
+
+          !findFavorite ? setIsFavorite(false) : setIsFavorite(true);
+        }
+      } catch (error) {
+        console.log(error);
+      }
+    }
+
+    fetchData();
 
     axios.get(`${url}/configuration/languages?api_key=${key}`).then((res) => {
       setLanguages(res.data);
     });
-  }, []);
+  }, [params.category, user.id, isFavorite]);
 
   useEffect(() => {
-    fav.map((data) => {
-      return axios
-        .get(`${url}/${data.type}/${data.favId}?api_key=${key}`)
-        .then((res) => {
-          let arrayList = favlist;
-          arrayList.push(res.data);
-          setFavlist(arrayList);
-        });
-    });
-  }, [fav]);
+    axios
+      .get(`${url}/${params.category}/${params.id}?api_key=${key}`)
+      .then((result) => {
+        setData(result.data);
+      });
+  }, []);
 
   const handleAddClick = () => {
     axios
@@ -48,23 +62,18 @@ const IndividualMovie = ({ user, setFavorites }) => {
       })
       .then((res) => {
         setFavorites(res.data);
+        setIsFavorite(true);
       });
   };
 
   const handleRemoveClick = () => {
-    axios.post(`http://localhost:3001/api/favorites/remove/${user.id}`, {
-      userId: `${user.id}`,
-      favId: `${params.id}`,
-    });
-  };
-
-  useEffect(() => {
     axios
-      .get(`${url}/${params.category}/${params.id}?api_key=${key}`)
-      .then((result) => {
-        setData(result.data);
-      });
-  }, []);
+      .post(`http://localhost:3001/api/favorites/remove/${user.id}`, {
+        userId: `${user.id}`,
+        favId: `${params.id}`,
+      })
+      .then(() => setIsFavorite(false))
+  };
 
   if (!data.id) {
     return <h1> Loading... </h1>;
@@ -79,7 +88,6 @@ const IndividualMovie = ({ user, setFavorites }) => {
             backgroundImage: `url(${imageOriginal}/${data.backdrop_path}?api=${key})`,
           }}
         ></div>
-
         <div className="opacityLayer"></div>
 
         <div className="IdividualContent">
@@ -87,52 +95,45 @@ const IndividualMovie = ({ user, setFavorites }) => {
             <div>
               <img
                 className="individualImage"
-                style={{ display: "block", margin: "auto" }}
                 src={`${imageLarge}${data.poster_path}?api_key=${key}`}
                 alt="Poster"
               />
             </div>
 
-            <div>
-              <h2 style={{ textAlign: "center" }}>
+            <div className="individualDetails">
+              <h2>
                 {params.category === "movie"
                   ? ` ${data.title}`
                   : ` ${data.name}`}
               </h2>
               <h3>{data.tagline}</h3>
 
-              {user.id ? (
-                !favlist.find((one) => one.id === Number(params.id)) ? (
-                  <button
-                    onClick={handleAddClick}
-                    style={{ marginLeft: "15px" }}
-                  >
-                    Add to favorite
-                  </button>
-                ) : (
-                  <button
-                    onClick={handleRemoveClick}
-                    style={{ marginLeft: "15px" }}
-                  >
-                    Added
-                  </button>
-                )
-              ) : null}
+              <div className="decorative-line1"></div>
 
-              <p style={{ marginLeft: "15px" }}>
-                <i>
-                  <b>Overview: </b>
-                </i>
-                {data.overview}
-              </p>
+              <div className="IndividualOverview">
+                <h4> Overview:</h4>
+                <p>{data.overview}</p>
+              </div>
+
+              <div className="decorative-line2"></div>
             </div>
           </div>
 
-          <div className="IndividualBottomContent">
-            Hola
-          </div>
+          <div className="IndividualBottomContent">Hola</div>
         </div>
       </div>
+      {user.id ? (
+        !isFavorite ? (
+          <button onClick={handleAddClick} style={{ marginLeft: "15px" }}>
+            Add to favorite
+          </button>
+        ) : (
+          <button onClick={handleRemoveClick} style={{ marginLeft: "15px" }}>
+            Added
+          </button>
+        )
+      ) : null}
+      <div>hola</div>
     </>
   );
 };
