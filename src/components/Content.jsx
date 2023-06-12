@@ -1,6 +1,7 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router";
+import IndividualMovie from "./Individual/IndividualMovie";
 
 const Content = ({ user, setFavorites }) => {
   const params = useParams();
@@ -12,7 +13,7 @@ const Content = ({ user, setFavorites }) => {
   const key = import.meta.env.VITE_KEY.replace(/["\\]/g, "");
   const url = import.meta.env.VITE_URL.replace(/["\\]/g, "");
   const imageLarge = import.meta.env.VITE_IMAGE_LARGE.replace(/["\\]/g, "");
-  
+
   useEffect(() => {
     axios.get(`http://localhost:3001/api/favorites/${user.id}`).then((res) => {
       setFav(res.data.filter((item) => item.type === params.category));
@@ -67,7 +68,11 @@ const Content = ({ user, setFavorites }) => {
 
   return (
     <>
-      <header>
+      <IndividualMovie
+        user={user}
+        setFavorites={setFavorites}
+      />
+      {/* <header>
         <h2 style={{ textAlign: "center" }}>
           {params.category.toUpperCase()}:
           {params.category === "movie" ? ` ${data.title}` : ` ${data.name}`}
@@ -263,7 +268,7 @@ const Content = ({ user, setFavorites }) => {
             </li>
           ) : null}
         </ul>
-      )}
+      )} */}
     </>
   );
 };
