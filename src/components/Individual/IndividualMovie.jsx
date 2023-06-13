@@ -8,6 +8,7 @@ const IndividualMovie = ({ user, setFavorites }) => {
   const [data, setData] = useState([]);
   const [languages, setLanguages] = useState([]);
   const [isFavorite, setIsFavorite] = useState(false);
+  const [credits, setCredits] = useState({});
 
   const key = import.meta.env.VITE_KEY.replace(/["\\]/g, "");
   const url = import.meta.env.VITE_URL.replace(/["\\]/g, "");
@@ -44,6 +45,10 @@ const IndividualMovie = ({ user, setFavorites }) => {
     axios.get(`${url}/configuration/languages?api_key=${key}`).then((res) => {
       setLanguages(res.data);
     });
+
+    axios
+      .get(`${url}/${params.category}/${params.id}/credits?api_key=${key}`)
+      .then((res) => setCredits(res.data));
   }, [params.category, user.id, isFavorite]);
 
   useEffect(() => {
@@ -72,15 +77,16 @@ const IndividualMovie = ({ user, setFavorites }) => {
         userId: `${user.id}`,
         favId: `${params.id}`,
       })
-      .then(() => setIsFavorite(false))
+      .then(() => setIsFavorite(false));
   };
 
   if (!data.id) {
     return <h1> Loading... </h1>;
   }
 
+  console.log(credits.crew.filter((item) => item.job === "Writer"));
   return (
-    <>
+    <div>
       <div className="individualContainer">
         <div
           className="individualBackgroundImage"
@@ -89,7 +95,6 @@ const IndividualMovie = ({ user, setFavorites }) => {
           }}
         ></div>
         <div className="opacityLayer"></div>
-
         <div className="IdividualContent">
           <div className="individualTopContent">
             <div>
@@ -101,12 +106,17 @@ const IndividualMovie = ({ user, setFavorites }) => {
             </div>
 
             <div className="individualDetails">
-              <h2>
-                {params.category === "movie"
-                  ? ` ${data.title}`
-                  : ` ${data.name}`}
-              </h2>
-              <h3>{data.tagline}</h3>
+              <div>
+                <h2>
+                  {params.category === "movie"
+                    ? ` ${data.title}`
+                    : ` ${data.name}`}
+                </h2>
+              </div>
+
+              <div>
+                <h3>{data.tagline}</h3>
+              </div>
 
               <div className="decorative-line1"></div>
 
@@ -116,10 +126,64 @@ const IndividualMovie = ({ user, setFavorites }) => {
               </div>
 
               <div className="decorative-line2"></div>
+
+              <div className="IndividualStatus">
+                <div className="details1">
+                  <h4> Status:</h4> <p>{data.status}</p>
+                </div>
+
+                <div className="details1">
+                  <h4> Date:</h4> <p>{data.release_date}</p>
+                </div>
+
+                <div className="details1">
+                  <h4> Duration:</h4> <p>{data.runtime} minutes</p>
+                </div>
+              </div>
+
+              <div className="decorative-line2"></div>
+
+              <div className="IndividualStatus">
+                <div className="cast">
+                  <h4> Writers:</h4>
+                  {credits.crew
+                    .filter((item) => item.job === "Writer")
+                    .map((writer, i, array) => {
+                      const isLastItem = i === array.length - 1;
+                      const puntuation = isLastItem ? "." : ",";
+                      return (
+                        <p key={i} style={{ marginRight: "7px" }}>
+                          {writer.name}
+                          {puntuation}
+                        </p>
+                      );
+                    })}
+                </div>
+              </div>
+              
+              <div className="decorative-line2"></div>
+
+              <div className="IndividualStatus">
+                <div className="cast">
+                  <h4> Directors:</h4>
+                  {credits.crew
+                    .filter((item) => item.job === "Director")
+                    .map((writer, i, array) => {
+                      const isLastItem = i === array.length - 1;
+                      const puntuation = isLastItem ? "." : ",";
+                      return (
+                        <p key={i} style={{ marginRight: "7px" }}>
+                          {writer.name}
+                          {puntuation}
+                        </p>
+                      );
+                    })}
+                </div>
+              </div>
+
+              <div className="decorative-line2"></div>
             </div>
           </div>
-
-          <div className="IndividualBottomContent">Hola</div>
         </div>
       </div>
       {user.id ? (
@@ -134,7 +198,7 @@ const IndividualMovie = ({ user, setFavorites }) => {
         )
       ) : null}
       <div>hola</div>
-    </>
+    </div>
   );
 };
 
