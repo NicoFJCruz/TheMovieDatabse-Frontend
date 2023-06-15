@@ -6,6 +6,7 @@ import { CircularProgressbar, buildStyles } from "react-circular-progressbar";
 import "react-circular-progressbar/dist/styles.css";
 import estrella from "../../assets/estrella.png";
 import estrellaCompleto from "../../assets/estrella-completo.png";
+import Cast from "../../commons/Cast/Cast";
 
 const IndividualMovie = ({ user, setFavorites }) => {
   const params = useParams();
@@ -87,7 +88,7 @@ const IndividualMovie = ({ user, setFavorites }) => {
   if (!data.id) {
     return <h1> Loading... </h1>;
   }
-  console.log(data);
+
   return (
     <div>
       <div className="individualContainer">
@@ -251,7 +252,7 @@ const IndividualMovie = ({ user, setFavorites }) => {
         </div>
       </div>
 
-      <div>hola</div>
+      <Cast />
     </div>
   );
 };
