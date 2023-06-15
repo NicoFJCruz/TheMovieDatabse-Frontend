@@ -252,7 +252,7 @@ const IndividualMovie = ({ user, setFavorites }) => {
         </div>
       </div>
 
-      <Cast />
+      <Cast cast={credits.cast}/>
     </div>
   );
 };

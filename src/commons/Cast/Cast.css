@@ -1,0 +1,43 @@
+.castContainer {
+  background-color: #0f172a;
+  color: white;
+  height: 440px;
+}
+
+.castSwiper {
+  height: 430px;
+}
+
+.sliderContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+
+.imageContainer {
+  width: 185px;
+  height: 285px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.sliderImage {
+  border-radius: 20%;
+  width: 185px;
+}
+
+.castName {
+  margin-top: 0.8rem;
+  margin-bottom: 0;
+  font-size: 20px;
+  font-weight: 800;
+}
+
+.castCharacter {
+  margin-top: 0.5rem;
+  font-size: 16px;
+  font-style: italic;
+  padding: 0 2rem;
+}
