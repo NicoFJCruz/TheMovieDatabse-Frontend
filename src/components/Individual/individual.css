@@ -28,7 +28,7 @@
   left: 0;
   width: 100%;
   min-height: 100%;
-  background: linear-gradient(to bottom, rgba(0, 0, 0, 0.669), black);
+  background: linear-gradient(to bottom, rgba(15, 23, 42, 0.669), #0f172a);
   z-index: 2;
   margin: 0;
 }
@@ -108,15 +108,15 @@
 }
 
 @media screen and (max-width: 600px) {
-  .IndividualStatus{
+  .IndividualStatus {
     flex-direction: column;
   }
 
-  .cast{
+  .cast {
     flex-direction: column;
   }
 
-  .cast p{
+  .cast p {
     width: 50vw;
     text-align: center;
   }
@@ -133,32 +133,46 @@
   }
 }
 
-.IndividualStatus{
+.IndividualStatus {
   display: flex;
   justify-content: space-around;
   align-items: center;
-  margin: 0 15px;
-  margin-top: 3%;
+  margin: 0 2.5rem;
+  margin-top: 0.8rem;
 }
 
-.details1{
+.details1 {
+  display: flex;
+  justify-content: center;
+  font-style: italic;
+  padding-top: 0.8rem;
+}
+
+.details1 h4 {
+  margin-right: 5px;
+  font-size: 18px;
+}
+
+.cast {
   display: flex;
   justify-content: center;
   font-style: italic;
 }
 
-.details1 h4{
+.cast h4 {
   margin-right: 5px;
   font-size: 18px;
 }
 
-.cast{
+.individualMovieProgressbar {
+  height: 5rem;
+  width: 5rem;
+  margin-bottom: 0.4rem;
+}
+
+.individualFavorite{
   display: flex;
-  justify-content: center;
-  font-style: italic;
-}
-
-.cast h4{
-  margin-right: 5px;
-  font-size: 18px;
+  align-items: center;
+  justify-content: space-around;
+  margin: 2rem;
 }

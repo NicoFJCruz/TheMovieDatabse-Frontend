@@ -2,6 +2,10 @@ import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router";
 import "./individual.css";
+import { CircularProgressbar, buildStyles } from "react-circular-progressbar";
+import "react-circular-progressbar/dist/styles.css";
+import estrella from "../../assets/estrella.png";
+import estrellaCompleto from "../../assets/estrella-completo.png";
 
 const IndividualMovie = ({ user, setFavorites }) => {
   const params = useParams();
@@ -83,8 +87,7 @@ const IndividualMovie = ({ user, setFavorites }) => {
   if (!data.id) {
     return <h1> Loading... </h1>;
   }
-
-  console.log(credits.crew.filter((item) => item.job === "Writer"));
+  console.log(data);
   return (
     <div>
       <div className="individualContainer">
@@ -125,6 +128,64 @@ const IndividualMovie = ({ user, setFavorites }) => {
                 <p>{data.overview}</p>
               </div>
 
+              <div className="individualFavorite">
+                <CircularProgressbar
+                  value={data.vote_average}
+                  maxValue={10}
+                  text={`${data.vote_average.toFixed(1)}`}
+                  strokeWidth={10}
+                  className="individualMovieProgressbar"
+                  styles={buildStyles({
+                    textColor: "#ffffff",
+                    pathColor:
+                      data.vote_average <= 4
+                        ? "#b91c1c"
+                        : data.vote_average < 6
+                        ? "#f97316"
+                        : data.vote_average < 7
+                        ? "#fde047"
+                        : data.vote_average < 8
+                        ? "#a3e635"
+                        : "#65a30d",
+                    trailColor: "#e6e6e6",
+                    textSize: "34px",
+                  })}
+                />
+                {user.id ? (
+                  !isFavorite ? (
+                    <div>
+                      <button
+                        onClick={handleAddClick}
+                        style={{
+                          marginLeft: "15px",
+                          backgroundColor: "inherit",
+                          border: "none",
+                        }}
+                      >
+                        <img src={estrella} alt="" style={{ width: "60px" }} />
+                      </button>
+                    </div>
+                  ) : (
+                    <div>
+                      <button
+                        onClick={handleRemoveClick}
+                        style={{
+                          marginLeft: "15px",
+                          backgroundColor: "inherit",
+                          border: "none",
+                        }}
+                      >
+                        <img
+                          src={estrellaCompleto}
+                          alt=""
+                          style={{ width: "60px" }}
+                        />
+                      </button>
+                    </div>
+                  )
+                ) : null}
+              </div>
+
               <div className="decorative-line2"></div>
 
               <div className="IndividualStatus">
@@ -147,7 +208,10 @@ const IndividualMovie = ({ user, setFavorites }) => {
                 <div className="cast">
                   <h4> Writers:</h4>
                   {credits.crew
-                    .filter((item) => item.job === "Writer")
+                    .filter(
+                      (item) =>
+                        item.job === "Writer" || item.job === "Screenplay"
+                    )
                     .map((writer, i, array) => {
                       const isLastItem = i === array.length - 1;
                       const puntuation = isLastItem ? "." : ",";
@@ -160,7 +224,7 @@ const IndividualMovie = ({ user, setFavorites }) => {
                     })}
                 </div>
               </div>
-              
+
               <div className="decorative-line2"></div>
 
               <div className="IndividualStatus">
@@ -181,22 +245,12 @@ const IndividualMovie = ({ user, setFavorites }) => {
                 </div>
               </div>
 
-              <div className="decorative-line2"></div>
+              <div className="decorative-line2"> </div>
             </div>
           </div>
         </div>
       </div>
-      {user.id ? (
-        !isFavorite ? (
-          <button onClick={handleAddClick} style={{ marginLeft: "15px" }}>
-            Add to favorite
-          </button>
-        ) : (
-          <button onClick={handleRemoveClick} style={{ marginLeft: "15px" }}>
-            Added
-          </button>
-        )
-      ) : null}
+
       <div>hola</div>
     </div>
   );
