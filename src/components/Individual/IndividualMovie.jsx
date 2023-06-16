@@ -46,10 +46,6 @@ const IndividualMovie = ({ user, setFavorites }) => {
 
     fetchData();
 
-    axios.get(`${url}/configuration/languages?api_key=${key}`).then((res) => {
-      setLanguages(res.data);
-    });
-
     axios
       .get(`${url}/${params.category}/${params.id}/credits?api_key=${key}`)
       .then((res) => setCredits(res.data));
