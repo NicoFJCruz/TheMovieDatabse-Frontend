@@ -6,7 +6,7 @@ import Home from "./components/Home";
 import UsersNMDB from "./components/UsersNMDB";
 import IndividualUser from "./commons/IndividualUser";
 import Navbar2 from "./commons/Navbar";
-import CategoryRoutes from "./commons/CategoryRoutes";
+import CategoryRoutes from "./CategoryRoutes";
 
 const App = () => {
   const [search, setSearch] = useState("");

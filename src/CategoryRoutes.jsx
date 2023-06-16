@@ -1,11 +1,11 @@
 import React from "react";
 import { useParams } from "react-router";
-import MoviePopular from "../components/Popular";
-import Search from "../components/Search";
+import MoviePopular from "./components/Popular";
+import Search from "./components/Search";
 import { Route, Routes } from "react-router";
-import Favorites from "../components/Favorites";
-import Content from "../components/Content";
-import Person from "../components/List/Person";
+import Favorites from "./components/Favorites";
+import Content from "./components/Content";
+import Person from "./components/List/Person";
 
 const CategoryRoutes = ({
   setSearchResult,
