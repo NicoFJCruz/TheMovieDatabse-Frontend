@@ -4,9 +4,9 @@ import Login from "./components/Login";
 import Signin from "./components/Signin";
 import Home from "./components/Home";
 import UsersNMDB from "./components/UsersNMDB";
-import IndividualUser from "./commons/IndividualUser";
 import Navbar2 from "./commons/Navbar";
 import CategoryRoutes from "./CategoryRoutes";
+import IndividualUser from "./components/Individual/IndividualUser";
 
 const App = () => {
   const [search, setSearch] = useState("");
