@@ -85,7 +85,7 @@ const IndividualMovie = ({ user, setFavorites }) => {
       .then(() => setIsFavorite(false));
   };
 
-  if (!data.id) {
+  if (!data.id || !credits.id) {
     return <h1> Loading... </h1>;
   }
 
@@ -194,13 +194,25 @@ const IndividualMovie = ({ user, setFavorites }) => {
                   <h4> Status:</h4> <p>{data.status}</p>
                 </div>
 
-                <div className="details1">
-                  <h4> Date:</h4> <p>{data.release_date}</p>
-                </div>
-
-                <div className="details1">
-                  <h4> Duration:</h4> <p>{data.runtime} minutes</p>
-                </div>
+                {params.category === "movie" ? (
+                  <>
+                    <div className="details1">
+                      <h4> Date:</h4> <p>{data.release_date}</p>
+                    </div>
+                    <div className="details1">
+                      <h4> Duration:</h4> <p>{data.runtime} minutes</p>
+                    </div>
+                  </>
+                ) : (
+                  <>
+                    <div className="details1">
+                      <h4> Date:</h4> <p>{data.first_air_date}</p>
+                    </div>
+                    <div className="details1">
+                      <h4> Episodes:</h4> <p>{data.number_of_episodes}</p>
+                    </div>
+                  </>
+                )}
               </div>
 
               <div className="decorative-line2"></div>
@@ -252,7 +264,7 @@ const IndividualMovie = ({ user, setFavorites }) => {
         </div>
       </div>
 
-      <Cast cast={credits.cast}/>
+      <Cast cast={credits.cast} />
     </div>
   );
 };
