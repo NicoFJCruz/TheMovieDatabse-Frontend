@@ -5,15 +5,16 @@ const CardUser = ({ data, user }) => {
     <div
       className="card"
       style={{
-        border: "2px solid aquamarine",
-        borderRadius: "5px",
         padding: "5px",
         height: "250px",
         marginLeft: "15px",
+        backgroundColor: "inherit",
+        color: "white",
+        textDecoration: "none",
       }}
     >
       {user.id === data.id ? <h3> Usuario logueado </h3> : <h3> _</h3>}
-      <div className="imageCard">
+      <div>
         <img
           style={{
             width: "150px",
@@ -24,7 +25,7 @@ const CardUser = ({ data, user }) => {
       </div>
 
       <div>
-        <p className="textCard">
+        <p >
           {data.id}: {data.name}
         </p>
       </div>
