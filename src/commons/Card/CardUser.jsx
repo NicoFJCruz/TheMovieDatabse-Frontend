@@ -19,7 +19,7 @@ const CardUser = ({ data, user }) => {
         </div>
         <div className="cardUserNameContainer">
           <span> {data.id} - </span>
-          <p className="cardUserName">{data.name}</p>
+          <p className="cardUserName">{data.name} {data.lastName}</p>
         </div>
         {user.id === data.id ? (
           <div className="cradUserLog">
