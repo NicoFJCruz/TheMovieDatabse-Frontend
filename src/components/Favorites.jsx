@@ -34,7 +34,7 @@ const Favorites = ({ user }) => {
       setFavlist({ results: favoritos });
     });
   }, [fav]);
-
+  
   if (!favlist.results[0]) {
     return <h1> No tienes favoritos </h1>;
   }
@@ -42,7 +42,7 @@ const Favorites = ({ user }) => {
   return (
     <>
       <h1> Favorites </h1>
-      <Grid data={favlist.results} />
+      <Grid data={favlist.results} type={params.category}/>
     </>
   );
 };

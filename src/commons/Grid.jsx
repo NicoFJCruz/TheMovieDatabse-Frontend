@@ -5,7 +5,7 @@ import { Container, Row, Col } from "react-bootstrap";
 import CardPerson from "./Card/CardPerson";
 import CardMovie from "./Card/CardMovie";
 
-const Grid = ({ data }) => {
+const Grid = ({ data, type }) => {
   const params = useParams();
   const image = import.meta.env.VITE_IMAGE.replace(/["\\]/g, "");
   const key = import.meta.env.VITE_KEY.replace(/["\\]/g, "");
@@ -21,7 +21,7 @@ const Grid = ({ data }) => {
               ) : item.media_type === "person" ? (
                 <CardPerson element={item} />
               ) : (
-                <CardMovie element={item} data={item.media_type} />
+                <CardMovie element={item} data={!item.media_type ? type : item.media_type} />
               )}
             </Col>
           );
