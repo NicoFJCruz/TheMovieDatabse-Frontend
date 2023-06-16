@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { Route, Routes } from "react-router";
 import Login from "./components/Login";
 import Signin from "./components/Signin";
-import Home from "./components/Home";
+import Home from "./components/Home/Home";
 import UsersNMDB from "./components/UsersNMDB";
 import Navbar2 from "./commons/Navbar";
 import CategoryRoutes from "./CategoryRoutes";
