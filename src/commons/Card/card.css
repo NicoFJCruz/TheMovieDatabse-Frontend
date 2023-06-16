@@ -18,7 +18,7 @@
 .cardMovieImage {
   border-radius: 5%;
   max-width: 245px;
-  max-height: 367.500px;
+  max-height: 367.5px;
   display: block;
   margin: auto;
 }
@@ -57,4 +57,56 @@
   height: 450px;
   margin: 0.5rem;
   text-align: center;
+}
+
+/* CARDUSER */
+
+.carsUserContainer {
+  height: 230px;
+  width: 150px;
+  margin-left: 15px;
+  background-color: inherit;
+  color: white;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  overflow: hidden;
+}
+
+.cardUserImageContainer {
+  display: flex;
+  justify-content: center; /* Centrar horizontalmente */
+  align-items: center;
+  width: 100%;
+}
+
+.cardUserImage {
+  width: 100%;
+}
+
+.cradUserLog {
+  text-align: center;
+}
+
+.cradUserLog h3 {
+  font-size: 14px;
+  text-decoration: none;
+  font-weight: 500;
+  font-style: italic;
+}
+
+.cardUserNameContainer {
+  display: flex;
+  align-items: center;
+}
+
+.cardUserNameContainer span {
+  margin-right: 0.5rem;
+  font-size: 22px;
+}
+
+.cardUserName {
+  margin: 4px 0;
+  font-size: 26px;
+  font-weight: bold;
 }
