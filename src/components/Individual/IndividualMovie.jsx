@@ -11,7 +11,6 @@ import Cast from "../../commons/Cast/Cast";
 const IndividualMovie = ({ user, setFavorites }) => {
   const params = useParams();
   const [data, setData] = useState([]);
-  const [languages, setLanguages] = useState([]);
   const [isFavorite, setIsFavorite] = useState(false);
   const [credits, setCredits] = useState({});
 
