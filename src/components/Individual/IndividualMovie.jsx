@@ -99,7 +99,11 @@ const IndividualMovie = ({ user, setFavorites }) => {
             <div>
               <img
                 className="individualImage"
-                src={`${imageLarge}${data.poster_path}?api_key=${key}`}
+                src={
+                  data.poster_path
+                    ? `${imageLarge}${data.poster_path}?api_key=${key}`
+                    : "/src/assets/movieposter.png"
+                }
                 alt="Poster"
               />
             </div>
