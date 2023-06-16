@@ -7,7 +7,6 @@ import "./Cast.css";
 import { Link } from "react-router-dom";
 
 const Cast = ({ cast }) => {
-  console.log(cast);
   const [windowWidth, setWindowWidth] = useState(window.innerWidth);
 
   const key = import.meta.env.VITE_KEY.replace(/["\\]/g, "");
