@@ -176,3 +176,15 @@
   justify-content: space-around;
   margin: 2rem;
 }
+
+/* INDIVIDUALPERSON */
+
+.seeMoreButton{
+  border: none;
+  background-color: inherit;
+  color: white;
+  margin-left: 3rem;
+}
+.seeMoreButton:hover{
+  color: #64748b;
+}

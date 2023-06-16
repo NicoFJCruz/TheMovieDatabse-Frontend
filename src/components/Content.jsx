@@ -6,7 +6,6 @@ import IndividualPerson from "./Individual/IndividualPerson";
 
 const Content = ({ user, setFavorites }) => {
   const params = useParams();
-  console.log(params.category);
   return (
     <>
       {params.category === "movie" || params.category === "tv" ? (

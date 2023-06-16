@@ -2,18 +2,12 @@ import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router";
 import "./individual.css";
-import { CircularProgressbar, buildStyles } from "react-circular-progressbar";
-import "react-circular-progressbar/dist/styles.css";
-import estrella from "../../assets/estrella.png";
-import estrellaCompleto from "../../assets/estrella-completo.png";
-import Cast from "../../commons/Cast/Cast";
 
 const IndividualPerson = ({ user, setFavorites }) => {
   const params = useParams();
   const [data, setData] = useState([]);
-  const [languages, setLanguages] = useState([]);
   const [isFavorite, setIsFavorite] = useState(false);
-  const [credits, setCredits] = useState({});
+  const [isOpen, setIsOpen] = useState(false);
 
   const key = import.meta.env.VITE_KEY.replace(/["\\]/g, "");
   const url = import.meta.env.VITE_URL.replace(/["\\]/g, "");
@@ -46,15 +40,7 @@ const IndividualPerson = ({ user, setFavorites }) => {
     }
 
     fetchData();
-
-    axios.get(`${url}/configuration/languages?api_key=${key}`).then((res) => {
-      setLanguages(res.data);
-    });
-
-    axios
-      .get(`${url}/${params.category}/${params.id}/credits?api_key=${key}`)
-      .then((res) => setCredits(res.data));
-  }, [params.category, user.id, isFavorite]);
+  }, [params.category, user.id, isFavorite, isOpen]);
 
   useEffect(() => {
     axios
@@ -64,126 +50,76 @@ const IndividualPerson = ({ user, setFavorites }) => {
       });
   }, []);
 
-  const handleAddClick = () => {
-    axios
-      .post(`http://localhost:3001/api/favorites/${user.id}`, {
-        favId: `${params.id}`,
-        type: `${params.category}`,
-      })
-      .then((res) => {
-        setFavorites(res.data);
-        setIsFavorite(true);
-      });
+  const handleClick = () => {
+    setIsOpen(!isOpen);
   };
 
-  const handleRemoveClick = () => {
-    axios
-      .post(`http://localhost:3001/api/favorites/remove/${user.id}`, {
-        userId: `${user.id}`,
-        favId: `${params.id}`,
-      })
-      .then(() => setIsFavorite(false));
-  };
-
-  if (!data.id || !credits.id) {
+  if (!data.id) {
     return <h1> Loading... </h1>;
   }
 
   return (
     <div>
       <div className="individualContainer">
-        <div
-          className="individualBackgroundImage"
-          style={{
-            backgroundImage: `url(${imageOriginal}/${data.backdrop_path}?api=${key})`,
-          }}
-        ></div>
-        <div className="opacityLayer"></div>
         <div className="IdividualContent">
           <div className="individualTopContent">
             <div>
               <img
                 className="individualImage"
-                src={`${imageLarge}${data.poster_path}?api_key=${key}`}
+                src={
+                  data.profile_path
+                    ? `${imageLarge}${data.profile_path}?api_key=${key}`
+                    : "/src/assets/profilepicture.png"
+                }
                 alt="Poster"
               />
             </div>
 
             <div className="individualDetails">
               <div>
-                <h2>
-                  {params.category === "movie"
-                    ? ` ${data.title}`
-                    : ` ${data.name}`}
-                </h2>
+                <h2>{data.name}</h2>
               </div>
 
               <div>
-                <h3>{data.tagline}</h3>
+                <h3>{data.place_of_birth}</h3>
               </div>
 
               <div className="decorative-line1"></div>
 
-              <div className="IndividualOverview">
-                <h4> Overview:</h4>
-                <p>{data.overview}</p>
-              </div>
+              {isOpen ? (
+                <div className="IndividualOverview">
+                  <h4> Biography:</h4>
+                  <p>{data.biography}</p>
+                  <button className="seeMoreButton" onClick={handleClick}>
+                    See less
+                  </button>
+                </div>
+              ) : (
+                <div className="IndividualOverview">
+                  <h4> Biography:</h4>
+                  <p style={{ marginBottom: "10px" }}>
+                    {data.biography
+                      .slice(0, 450)
+                      .split(" ")
+                      .slice(0, -1)
+                      .join(" ") + "..."}
+                  </p>
+                  <button className="seeMoreButton" onClick={handleClick}>
+                    See more
+                  </button>
+                </div>
+              )}
 
-              <div className="individualFavorite">
-                <CircularProgressbar
-                  value={data.vote_average}
-                  maxValue={10}
-                  text={`${data.vote_average.toFixed(1)}`}
-                  strokeWidth={10}
-                  className="individualMovieProgressbar"
-                  styles={buildStyles({
-                    textColor: "#ffffff",
-                    pathColor:
-                      data.vote_average <= 4
-                        ? "#b91c1c"
-                        : data.vote_average < 6
-                        ? "#f97316"
-                        : data.vote_average < 7
-                        ? "#fde047"
-                        : data.vote_average < 8
-                        ? "#a3e635"
-                        : "#65a30d",
-                    trailColor: "#e6e6e6",
-                    textSize: "34px",
-                  })}
-                />
-                {user.id ? (
-                  !isFavorite ? (
-                    <div>
-                      <button
-                        onClick={handleAddClick}
-                        style={{
-                          marginLeft: "15px",
-                          backgroundColor: "inherit",
-                          border: "none",
-                        }}
-                      >
-                        <img src={estrella} alt="" style={{ width: "60px" }} />
-                      </button>
-                    </div>
-                  ) : (
-                    <div>
-                      <button
-                        onClick={handleRemoveClick}
-                        style={{
-                          marginLeft: "15px",
-                          backgroundColor: "inherit",
-                          border: "none",
-                        }}
-                      >
-                        <img
-                          src={estrellaCompleto}
-                          alt=""
-                          style={{ width: "60px" }}
-                        />
-                      </button>
-                    </div>
-                  )
+              <div className="decorative-line2"></div>
+
+              <div className="IndividualStatus">
+                <div className="details1">
+                  <h4> Birthday:</h4> <p>{data.birthday}</p>
+                </div>
+                {data.deathday ? (
+                  <div className="details1">
+                    <h4> Deathday:</h4> <p>{data.deathday}</p>
+                  </div>
                 ) : null}
               </div>
 
@@ -191,80 +127,42 @@ const IndividualPerson = ({ user, setFavorites }) => {
 
               <div className="IndividualStatus">
                 <div className="details1">
-                  <h4> Status:</h4> <p>{data.status}</p>
+                  <h4> Gender:</h4>
+                  <p> {data.gender === 1 ? "Female" : "Male"}</p>
                 </div>
-
-                {params.category === "movie" ? (
-                  <>
-                    <div className="details1">
-                      <h4> Date:</h4> <p>{data.release_date}</p>
-                    </div>
-                    <div className="details1">
-                      <h4> Duration:</h4> <p>{data.runtime} minutes</p>
-                    </div>
-                  </>
-                ) : (
-                  <>
-                    <div className="details1">
-                      <h4> Date:</h4> <p>{data.first_air_date}</p>
-                    </div>
-                    <div className="details1">
-                      <h4> Episodes:</h4> <p>{data.number_of_episodes}</p>
-                    </div>
-                  </>
-                )}
-              </div>
-
-              <div className="decorative-line2"></div>
-
-              <div className="IndividualStatus">
-                <div className="cast">
-                  <h4> Writers:</h4>
-                  {credits.crew
-                    .filter(
-                      (item) =>
-                        item.job === "Writer" || item.job === "Screenplay"
-                    )
-                    .map((writer, i, array) => {
-                      const isLastItem = i === array.length - 1;
-                      const puntuation = isLastItem ? "." : ",";
-                      return (
-                        <p key={i} style={{ marginRight: "7px" }}>
-                          {writer.name}
-                          {puntuation}
-                        </p>
-                      );
-                    })}
+                <div className="details1">
+                  <h4> Known for:</h4>
+                  <p> {data.known_for_department}</p>
                 </div>
               </div>
 
-              <div className="decorative-line2"></div>
+              {data.also_known_as[0] ? (
+                <>
+                  <div className="decorative-line2"></div>
 
-              <div className="IndividualStatus">
-                <div className="cast">
-                  <h4> Directors:</h4>
-                  {credits.crew
-                    .filter((item) => item.job === "Director")
-                    .map((writer, i, array) => {
-                      const isLastItem = i === array.length - 1;
-                      const puntuation = isLastItem ? "." : ",";
-                      return (
-                        <p key={i} style={{ marginRight: "7px" }}>
-                          {writer.name}
-                          {puntuation}
-                        </p>
-                      );
-                    })}
-                </div>
-              </div>
+                  <div className="IndividualStatus">
+                    <div className="cast">
+                      <h4> Also known as:</h4>
+                      {data.also_known_as.slice(0, 3).map((item, i, array) => {
+                        const isLastItem = i === array.length - 1;
+                        const puntuation = isLastItem ? "." : ",";
+                        return (
+                          <p key={i} style={{ marginRight: "7px" }}>
+                            {item}
+                            {puntuation}
+                          </p>
+                        );
+                      })}
+                    </div>
+                  </div>
+                </>
+              ) : null}
 
               <div className="decorative-line2"> </div>
             </div>
           </div>
         </div>
       </div>
-
-      <Cast cast={credits.cast} />
     </div>
   );
 };
