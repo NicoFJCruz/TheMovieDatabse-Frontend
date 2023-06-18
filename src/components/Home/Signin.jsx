@@ -3,6 +3,7 @@ import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router";
 import "./home.css";
 import { Form, Button } from "react-bootstrap";
+import { message } from "antd";
 
 const Signin = () => {
   const [email, setEmail] = useState("");
@@ -31,6 +32,19 @@ const Signin = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    if (!name) {
+      return message.warning("Write your name please");
+    }
+    if (!lastName) {
+      return message.warning("Write your lastname please");
+    }
+    if (!email) {
+      return message.warning("Write your email please");
+    }
+    if (!password) {
+      return message.warning("Write your password please");
+    }
+
     axios
       .post(
         "http://localhost:3001/api/users",
@@ -46,10 +60,10 @@ const Signin = () => {
       )
       .then((res) => {
         navigate("/login");
-        alert("Usuario creado");
+        message.success("User created");
       })
       .catch(() => {
-        alert("No se pudo crear usuario");
+        message.error("Can't create the user.");
       });
   };
 
@@ -66,6 +80,7 @@ const Signin = () => {
         }}
       ></div>
       <div className="homeOpacityLayer"></div>
+
       <div className="homeTopContainer">
         <div className="logTitle">
           <h1> Welcome to the NicoMDB </h1>

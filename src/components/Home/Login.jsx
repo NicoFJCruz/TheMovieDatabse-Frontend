@@ -3,6 +3,7 @@ import axios from "axios";
 import { useNavigate } from "react-router";
 import "./home.css";
 import { Form, Button } from "react-bootstrap";
+import { message } from "antd";
 
 const Login = ({ setUser }) => {
   const [email, setEmail] = useState("");
@@ -33,6 +34,13 @@ const Login = ({ setUser }) => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    if (!email) {
+      return message.warning("Write your email please")
+    }
+    if (!password) {
+      return message.warning("Write your password please")
+    }
+
     axios
       .post(
         "http://localhost:3001/api/users/login",
@@ -46,10 +54,10 @@ const Login = ({ setUser }) => {
         setUser(user.data);
         localStorage.setItem("user", JSON.stringify(user.data));
         navigate("/movie");
-        alert("Usuario logueado");
+        message.success("LogIn succesfully");
       })
       .catch((error) => {
-        alert("No se pudo loguear");
+        message.error("Can't login, please check your email or password");
       });
   };
 

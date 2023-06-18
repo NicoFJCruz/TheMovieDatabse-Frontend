@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import axios from "axios";
 import { Link, useNavigate } from "react-router-dom";
+import { message } from "antd";
 
 const Navbar = ({ user, setUser }) => {
   const navigate = useNavigate();
@@ -16,7 +17,7 @@ const Navbar = ({ user, setUser }) => {
         setUser({});
         localStorage.removeItem("user");
         navigate("/login");
-        alert("Usuario deslogueado");
+        message.success("Closed session");
       })
       .catch((error) => {
         console.log(error);
