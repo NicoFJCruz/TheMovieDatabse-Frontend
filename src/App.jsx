@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { Route, Routes } from "react-router";
-import Login from "./components/Login";
-import Signin from "./components/Signin";
+import Login from "./components/Home/Login";
+import Signin from "./components/Home/Signin";
 import Home from "./components/Home/Home";
 import UsersNMDB from "./components/UsersNMDB";
 import Navbar2 from "./commons/Navbar";

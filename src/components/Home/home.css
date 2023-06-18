@@ -29,7 +29,7 @@
   align-items: center;
 }
 
-.homeTitle h1{
+.homeTitle h1 {
   margin: 0;
   margin-bottom: 4rem;
   font-size: 40px;
@@ -43,4 +43,61 @@
 
 .homeFormControl {
   margin-right: 1rem;
+}
+
+/* LOGIN USER */
+
+.logForm {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  max-width: 500px;
+}
+
+.formGroup {
+  margin-top: 0.8rem;
+  width: 100%;
+}
+
+.formLabel {
+  font-size: 20px;
+}
+
+.formControl {
+  margin-left: 1rem;
+}
+
+#formButton {
+  width: 150px;
+  margin: 1rem;
+  font-size: 20px;
+  font-weight: bold;
+}
+
+.logTitle{
+  margin: 4rem 1rem;
+  text-align: center;
+}
+
+.logTitle h1 {
+  margin: 0;
+  font-size: 40px;
+  font-weight: bolder;
+}
+
+.logTitle button {
+  background-color: inherit;
+  border: none;
+  color: inherit;
+  font-weight: bold;
+  font-style: italic;
+  margin: 0;
+}
+
+.logTitle h3 {
+  margin: 0;
+  font-size: 20px;
+  font-weight: 300;
+  font-style: italic;
 }
