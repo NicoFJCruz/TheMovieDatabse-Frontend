@@ -92,7 +92,7 @@ const Login = ({ setUser }) => {
               type="password"
               value={password}
               onChange={(e) => setPassword(e.target.value)}
-              placeholder="Your Password"
+              placeholder="Your password"
               className="formControl"
             />
           </Form.Group>
