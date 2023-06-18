@@ -101,3 +101,9 @@
   font-weight: 300;
   font-style: italic;
 }
+
+@media (max-width: 640px) {
+  .homeTopContainer{
+    margin: 0 2rem;
+  }
+}
