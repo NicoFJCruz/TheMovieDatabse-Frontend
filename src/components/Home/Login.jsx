@@ -53,7 +53,7 @@ const Login = ({ setUser }) => {
       .then((user) => {
         setUser(user.data);
         localStorage.setItem("user", JSON.stringify(user.data));
-        navigate("/movie");
+        navigate("/");
         message.success("LogIn succesfully");
       })
       .catch((error) => {
@@ -71,7 +71,7 @@ const Login = ({ setUser }) => {
       ></div>
       <div className="homeOpacityLayer"></div>
 
-      <div className="homeTopContainer">
+      <div className="logTopContainer">
         <div className="logTitle">
           <h1> Welcome to the NicoMDB </h1>
           <div>

@@ -81,7 +81,7 @@ const Signin = () => {
       ></div>
       <div className="homeOpacityLayer"></div>
 
-      <div className="homeTopContainer">
+      <div className="logTopContainer">
         <div className="logTitle">
           <h1> Welcome to the NicoMDB </h1>
           <div>

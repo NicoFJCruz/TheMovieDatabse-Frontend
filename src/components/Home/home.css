@@ -46,6 +46,13 @@
 }
 
 /* LOGIN USER */
+.logTopContainer{
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
 
 .logForm {
   display: flex;
@@ -103,7 +110,7 @@
 }
 
 @media (max-width: 640px) {
-  .homeTopContainer{
+  .logTopContainer{
     margin: 0 2rem;
   }
 }
