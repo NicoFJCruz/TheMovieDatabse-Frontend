@@ -14,7 +14,7 @@ const Search = ({ searchResult, search }) => {
       <h1>
         Search {params.category} "{search}":
       </h1>
-      <Grid data={searchResult.results} />
+      <Grid data={searchResult.results} type={params.category} />
     </div>
   );
 };
