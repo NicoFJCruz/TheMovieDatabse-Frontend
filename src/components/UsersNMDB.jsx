@@ -8,7 +8,7 @@ const UsersNMDB = ({ user }) => {
   const [userList, setUserList] = useState([]);
 
   useEffect(() => {
-    axios.get(`http://localhost:3001/api/users`).then((res) => {
+    axios.get(`${backend}/api/users`).then((res) => {
       setUserList(res.data);
     });
   }, []);

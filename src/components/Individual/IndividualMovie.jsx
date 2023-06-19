@@ -31,7 +31,7 @@ const IndividualMovie = ({ user, setFavorites }) => {
 
         if (user.id && params.category) {
           const favorites = await axios.get(
-            `http://localhost:3001/api/favorites/${user.id}`
+            `${backend}/api/favorites/${user.id}`
           );
           const findFavorite = await favorites.data.find(
             (item) => Number(item.favId) === current.data.id
@@ -61,7 +61,7 @@ const IndividualMovie = ({ user, setFavorites }) => {
 
   const handleAddClick = () => {
     axios
-      .post(`http://localhost:3001/api/favorites/${user.id}`, {
+      .post(`${backend}/api/favorites/${user.id}`, {
         favId: `${params.id}`,
         type: `${params.category}`,
       })
@@ -73,7 +73,7 @@ const IndividualMovie = ({ user, setFavorites }) => {
 
   const handleRemoveClick = () => {
     axios
-      .post(`http://localhost:3001/api/favorites/remove/${user.id}`, {
+      .post(`${backend}/api/favorites/remove/${user.id}`, {
         userId: `${user.id}`,
         favId: `${params.id}`,
       })

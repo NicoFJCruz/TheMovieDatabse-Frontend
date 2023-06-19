@@ -26,7 +26,7 @@ const IndividualPerson = ({ user, setFavorites }) => {
 
         if (user.id && params.category) {
           const favorites = await axios.get(
-            `http://localhost:3001/api/favorites/${user.id}`
+            `${backend}/api/favorites/${user.id}`
           );
           const findFavorite = await favorites.data.find(
             (item) => Number(item.favId) === current.data.id

@@ -8,11 +8,7 @@ const Navbar = ({ user, setUser }) => {
 
   const handleLogout = () => {
     axios
-      .post(
-        "http://localhost:3001/api/users/logout",
-        {},
-        { withCredentials: true }
-      )
+      .post(`${backend}/api/users/logout`, {}, { withCredentials: true })
       .then(() => {
         setUser({});
         localStorage.removeItem("user");
@@ -54,29 +50,17 @@ const Navbar = ({ user, setUser }) => {
         >
           <ul className="navbar-nav">
             <li className="nav-item">
-              <a
-                className="nav-link active"
-                aria-current="page"
-                href="/movie"
-              >
+              <a className="nav-link active" aria-current="page" href="/movie">
                 Movies
               </a>
             </li>
             <li className="nav-item">
-              <a
-                className="nav-link active"
-                aria-current="page"
-                href="/tv"
-              >
+              <a className="nav-link active" aria-current="page" href="/tv">
                 Series
               </a>
             </li>
             <li className="nav-item">
-              <a
-                className="nav-link active"
-                aria-current="page"
-                href="/person"
-              >
+              <a className="nav-link active" aria-current="page" href="/person">
                 Person
               </a>
             </li>

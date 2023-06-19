@@ -13,15 +13,14 @@ const IndividualUser = () => {
   const [userFavlistM, setUserFavlistM] = useState([]);
   const [userFavlistTv, setUserFavlistTv] = useState([]);
 
+  const backend = import.meta.env.VITE_BACKEND_URL.replace(/["\\]/g, "");
   const key = import.meta.env.VITE_KEY.replace(/["\\]/g, "");
   const url = import.meta.env.VITE_URL.replace(/["\\]/g, "");
   const params = useParams();
-
+  
   useEffect(() => {
     const fetchData = async () => {
-      const favs = await axios.get(
-        `http://localhost:3001/api/favorites/${params.id}`
-      );
+      const favs = await axios.get(`${backend}/api/favorites/${params.id}`);
       const favMovie = await favs.data.filter((item) => item.type === "movie");
       favMovie ? setUserFavM(favMovie) : null;
 
@@ -30,7 +29,7 @@ const IndividualUser = () => {
     };
     fetchData();
 
-    axios.get(`http://localhost:3001/api/users/${params.id}`).then((res) => {
+    axios.get(`${backend}/api/users/${params.id}`).then((res) => {
       setUsuario(res.data);
     });
   }, []);
@@ -80,7 +79,7 @@ const IndividualUser = () => {
       <div className="FavoritesMovie">
         <h2> Favorites Movies: </h2>
         {userFavlistM[0] ? (
-            <Grid data={userFavlistM} type={"movie"} />
+          <Grid data={userFavlistM} type={"movie"} />
         ) : (
           <h3 style={{ marginLeft: "25px" }}>
             Este usuario no tiene películas favoritas.
@@ -92,7 +91,6 @@ const IndividualUser = () => {
         <h2> Favorites Series: </h2>
         {userFavlistTv[0] ? (
           <Grid data={userFavlistTv} type={"tv"} />
-
         ) : (
           <h3 style={{ marginLeft: "25px" }}>
             Este usuario no tiene series favoritas.

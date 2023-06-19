@@ -14,7 +14,7 @@ const Favorites = ({ user }) => {
   useEffect(() => {
     if (user.id && params.category) {
       axios
-        .get(`http://localhost:3001/api/favorites/${user.id}`)
+        .get(`${backend}/api/favorites/${user.id}`)
         .then((res) => {
           setFav(res.data.filter((item) => item.type === params.category));
         });
