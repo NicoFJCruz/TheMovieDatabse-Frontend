@@ -12,7 +12,7 @@ const CardUser = ({ data, user }) => {
       <div className="carsUserContainer">
         <div className="cardUserImageContainer">
           <img
-            src="src/assets/cardUserProfile.png"
+            src="/assets/cardUserProfile.png"
             alt="Usuario"
             className="cardUserImage"
           />
