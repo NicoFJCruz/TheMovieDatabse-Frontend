@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import "./card.css";
-import cardProfile from "../../assets/cardProfile.png";
+import profilepicture from "../../assets/profilepicture.png";
 
 const CardUser = ({ data, user }) => {
   const key = import.meta.env.VITE_KEY.replace(/["\\]/g, "");
@@ -12,7 +12,7 @@ const CardUser = ({ data, user }) => {
       <div className="carsUserContainer">
         <div className="cardUserImageContainer">
           <img
-            src={cardProfile}
+            src={profilepicture}
             alt="Usuario"
             className="cardUserImage"
           />
