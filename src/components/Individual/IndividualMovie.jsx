@@ -14,6 +14,7 @@ const IndividualMovie = ({ user, setFavorites }) => {
   const [isFavorite, setIsFavorite] = useState(false);
   const [credits, setCredits] = useState({});
 
+  const backend = import.meta.env.VITE_BACKEND_URL.replace(/["\\]/g, "");
   const key = import.meta.env.VITE_KEY.replace(/["\\]/g, "");
   const url = import.meta.env.VITE_URL.replace(/["\\]/g, "");
   const imageLarge = import.meta.env.VITE_IMAGE_LARGE.replace(/["\\]/g, "");

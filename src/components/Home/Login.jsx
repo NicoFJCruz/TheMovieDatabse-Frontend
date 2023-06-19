@@ -10,6 +10,7 @@ const Login = ({ setUser }) => {
   const [password, setPassword] = useState("");
   const navigate = useNavigate();
 
+  const backend = import.meta.env.VITE_BACKEND_URL.replace(/["\\]/g, "");
   const [trending, setTrending] = useState([]);
   const url = import.meta.env.VITE_URL.replace(/["\\]/g, "");
   const key = import.meta.env.VITE_KEY.replace(/["\\]/g, "");

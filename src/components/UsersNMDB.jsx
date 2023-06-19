@@ -6,6 +6,7 @@ import CardUser from "../commons/Card/CardUser";
 
 const UsersNMDB = ({ user }) => {
   const [userList, setUserList] = useState([]);
+  const backend = import.meta.env.VITE_BACKEND_URL.replace(/["\\]/g, "");
 
   useEffect(() => {
     axios.get(`${backend}/api/users`).then((res) => {

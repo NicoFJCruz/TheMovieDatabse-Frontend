@@ -5,6 +5,7 @@ import { message } from "antd";
 
 const Navbar = ({ user, setUser }) => {
   const navigate = useNavigate();
+  const backend = import.meta.env.VITE_BACKEND_URL.replace(/["\\]/g, "");
 
   const handleLogout = () => {
     axios

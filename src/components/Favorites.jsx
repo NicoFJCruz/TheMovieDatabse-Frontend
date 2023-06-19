@@ -8,6 +8,7 @@ const Favorites = ({ user }) => {
   const [favlist, setFavlist] = useState({ results: [] });
   const params = useParams();
 
+  const backend = import.meta.env.VITE_BACKEND_URL.replace(/["\\]/g, "");
   const key = import.meta.env.VITE_KEY.replace(/["\\]/g, "");
   const url = import.meta.env.VITE_URL.replace(/["\\]/g, "");
 
