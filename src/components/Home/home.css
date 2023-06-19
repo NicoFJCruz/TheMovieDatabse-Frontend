@@ -113,4 +113,16 @@
   .logTopContainer{
     margin: 0 2rem;
   }
+  .homeTopContainer{
+    margin: 0 2rem;
+  }
+  .homeForm{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  .homeFormControl{
+    margin-bottom: 0.5rem;
+  }
 }
