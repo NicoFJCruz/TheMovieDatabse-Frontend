@@ -264,7 +264,7 @@ const IndividualMovie = ({ user, setFavorites }) => {
         </div>
       </div>
 
-      <Cast cast={credits.cast} />
+      {credits.cast[0] ? <Cast cast={credits.cast} /> : null}
     </div>
   );
 };
