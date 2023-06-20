@@ -7,6 +7,7 @@ import UsersNMDB from "./components/UsersNMDB";
 import Navbar2 from "./commons/Navbar";
 import CategoryRoutes from "./CategoryRoutes";
 import IndividualUser from "./components/Individual/IndividualUser";
+import Footer from "./components/Footer/Footer";
 
 const App = () => {
   const [search, setSearch] = useState("");
@@ -56,6 +57,8 @@ const App = () => {
         />
         <Route path="*" element={<Home user={user} />} />
       </Routes>
+
+      <Footer/>
     </>
   );
 };
